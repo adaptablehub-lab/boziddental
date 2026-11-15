@@ -13,7 +13,7 @@ python3 -m http.server 8080
 ```
 
 ## Photos
-Every image slot uses a soft placeholder in `assets/img/`. To add real photos, replace a file with your own photo **using the same file name** (for example `assets/img/hero.jpg`). No code changes are needed.
+Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file with your own photo **using the same file name** (for example `assets/img/hero.jpg`). No code changes are needed.
 
 - `hero.jpg`: wide treatment-room or smiling-patient photo (about 1600×1000)
 - `service-*.jpg`: one per service (hygiene, aesthetic, veneers, whitening, implants, ortho, braces, extraction, surgery), about 800×600
@@ -36,3 +36,27 @@ The booking form currently opens the visitor's email client. To receive submissi
 
 ## Deploy
 Any static host works: GitHub Pages (Settings → Pages → deploy from `main`), Netlify or Vercel.
+
+## Photo credits
+Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexels License](https://www.pexels.com/license/) (free to use, attribution not required). Replace them with your own clinic photos when you can.
+
+| File | Pexels photo |
+|---|---|
+| hero.jpg | https://www.pexels.com/photo/6473194/ |
+| cta.jpg | https://www.pexels.com/photo/287237/ |
+| first-visit.jpg | https://www.pexels.com/photo/6627320/ |
+| service-hygiene.jpg | https://www.pexels.com/photo/3881296/ |
+| service-aesthetic.jpg | https://www.pexels.com/photo/11956948/ |
+| service-veneers.jpg | https://www.pexels.com/photo/3762402/ |
+| service-whitening.jpg | https://www.pexels.com/photo/5622257/ |
+| service-implants.jpg | https://www.pexels.com/photo/6502305/ |
+| service-ortho.jpg | https://www.pexels.com/photo/3845985/ |
+| service-braces.jpg | https://www.pexels.com/photo/6502309/ |
+| service-extraction.jpg | https://www.pexels.com/photo/20301626/ |
+| service-surgery.jpg | https://www.pexels.com/photo/16098318/ |
+| value-1.jpg | https://www.pexels.com/photo/19879741/ |
+| value-2.jpg | https://www.pexels.com/photo/7800666/ |
+| value-3.jpg | https://www.pexels.com/photo/14235198/ |
+| value-4.jpg | https://www.pexels.com/photo/7800669/ |
+
+Team photos (`team-1…4.jpg`) are intentionally left as placeholders: use real photos of your own staff.
