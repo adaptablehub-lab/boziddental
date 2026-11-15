@@ -1,0 +1,11 @@
+name = "bozid-assistant"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Websites allowed to use the assistant (comma-separated, no trailing slash)
+ALLOWED_ORIGINS = "https://adaptablehub-lab.github.io,http://localhost:5173,http://localhost:5175,http://localhost:4173"
+MODEL = "claude-opus-5-5"
+
+# The Claude API key is a secret, never stored here:  npx wrangler secret put ANTHROPIC_API_KEY

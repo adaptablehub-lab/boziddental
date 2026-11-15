@@ -70,6 +70,30 @@ The booking form sends the request through the patient's WhatsApp (to 0808 662 2
 - **Moving to a custom domain:** update `SITE_URL` and `BASE_PATH` in `src/seo.js`, `base` in `vite.config.js`, and the `basename` in `src/App.jsx` / `src/entry-server.jsx`.
 - **Next steps for the clinic:** create a Google Business Profile with the same name, address and phone numbers, and add the site link there.
 
+## Virtual assistant (AI)
+A chat button ("Ask us") on every page answers questions about the clinic's services, hours, location and booking, and hands over to WhatsApp for anything else.
+
+- **How it works:** the widget (`src/components/Assistant.jsx`) sends the chat to a small Cloudflare Worker (`worker/`), which calls Claude (`claude-opus-5-5`) with the Claude API key kept secret on the server. The assistant's knowledge and rules are built from `src/data.js` in `src/assistant/knowledge.js`, so editing the site content updates the assistant too.
+- **Safety rules:** it only states facts from the site, never quotes prices, never diagnoses or recommends medicine, sends urgent symptoms to emergency care, and can't book or confirm appointments (it links to the booking page and WhatsApp). Server-side fallbacks are on: if Claude's safety filter declines a normal question, the API retries it on Anthropic's recommended fallback model.
+- **Without the Worker** (or if it is down), the widget still works with instant offline answers from the same data.
+
+### Set it up (one time)
+1. Create a Claude API key at https://console.anthropic.com (add billing; you pay per message).
+2. Create a free Cloudflare account, then in `worker/` (Node 22+):
+   ```bash
+   npm install
+   npx wrangler login
+   npx wrangler secret put ANTHROPIC_API_KEY
+   npx wrangler deploy
+   ```
+   Wrangler prints the Worker address, e.g. `https://bozid-assistant.<you>.workers.dev`.
+3. In GitHub: repo **Settings → Secrets and variables → Actions → Variables**, add `ASSISTANT_URL` with that address, then re-run the deploy (or push).
+4. If the site moves to its own domain, add it to `ALLOWED_ORIGINS` in `worker/wrangler.toml` and deploy the Worker again.
+
+To try it locally, create `.env.local` with `VITE_ASSISTANT_URL=http://localhost:8787` and run `npm run dev` here and in `worker/` (put the key in `worker/.dev.vars` as `ANTHROPIC_API_KEY=...`; never commit it).
+
+Tip: set a monthly spend limit in the Claude Console, and a rate-limiting rule for the Worker in Cloudflare to stop abuse.
+
 ## Deploy
 Every push to `main` builds the site and publishes it to GitHub Pages automatically (see `.github/workflows/deploy.yml`).
 Live site: https://adaptablehub-lab.github.io/boziddental/

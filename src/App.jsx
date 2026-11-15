@@ -3,6 +3,7 @@ import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-
 import { applyHead } from "./head.js";
 import Header from "./components/Header.jsx";
 import { Footer, WhatsAppFab } from "./components/Footer.jsx";
+import Assistant from "./components/Assistant.jsx";
 import { useReveal, useScrollY } from "./hooks/index.js";
 import * as P from "./pages/index.jsx";
 
@@ -35,13 +36,15 @@ function Layout() {
 
   useReveal(".section-head, .about > *, .svc-card, .value, .split > *, .review, .member, .cat-panels, .virtual__intro, .vcard, .accred__card, .faq-wrap > *, .cta", pathname + search);
 
+  const [chatOpen, setChatOpen] = useState(false);
   const isHome = pathname === "/";
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <Header scrolled={scrollY > 60} />
       <main id="main" tabIndex={-1}><Outlet /></main>
-      <WhatsAppFab visible={scrollY > (isHome ? viewport * 0.6 : 240) && !overlapping} />
+      <WhatsAppFab visible={scrollY > (isHome ? viewport * 0.6 : 240) && !overlapping && !chatOpen} />
+      <Assistant onOpenChange={setChatOpen} />
       <Footer />
     </>
   );
