@@ -17,6 +17,7 @@
     const hero = heroMedia.closest(".hero");
     const slides = Array.from(heroMedia.querySelectorAll(".hero__slide"));
     const dots = Array.from(hero.querySelectorAll(".hero__dot"));
+    const panels = Array.from(hero.querySelectorAll(".hero__panel"));
     const DELAY = 6000;
     let current = 0;
     let timer = null;
@@ -28,6 +29,13 @@
       slides.forEach((s, n) => {
         s.classList.toggle("is-active", n === current);
         s.setAttribute("aria-hidden", String(n !== current));
+      });
+      // Swap the headline, text and button to match the slide
+      panels.forEach((p, n) => {
+        const on = n === current;
+        p.classList.toggle("is-active", on);
+        p.toggleAttribute("inert", !on);
+        if (on) p.removeAttribute("aria-hidden"); else p.setAttribute("aria-hidden", "true");
       });
       dots.forEach((d, n) => {
         d.classList.remove("is-active");
