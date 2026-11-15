@@ -15,7 +15,7 @@ python3 -m http.server 8080
 ## Photos
 Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file with your own photo **using the same file name** (for example `assets/img/hero.jpg`). No code changes are needed.
 
-- `hero.jpg`: wide treatment-room or smiling-patient photo (about 1600×1000)
+- `hero-1…4.jpg`: the four hero slides, wide photos (about 1800×1200). Slide 1 is your own photo
 - `service-*.jpg`: one per service (hygiene, aesthetic, veneers, whitening, implants, ortho, braces, extraction, surgery), about 800×600
 - `value-1…4.jpg`: tall photos for the "Why choose us" cards (about 760×1010)
 - `first-visit.jpg`: dentist with a patient (portrait)
@@ -42,7 +42,10 @@ Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexel
 
 | File | Pexels photo |
 |---|---|
-| hero.jpg | https://www.pexels.com/photo/6473194/ |
+| hero-1.jpg | Provided by the clinic |
+| hero-2.jpg | https://www.pexels.com/photo/5355723/ |
+| hero-3.jpg | https://www.pexels.com/photo/7800560/ |
+| hero-4.jpg | https://www.pexels.com/photo/6473194/ |
 | cta.jpg | https://www.pexels.com/photo/287237/ |
 | first-visit.jpg | https://www.pexels.com/photo/6627320/ |
 | service-hygiene.jpg | https://www.pexels.com/photo/3881296/ |

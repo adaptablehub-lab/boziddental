@@ -11,6 +11,61 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  // Hero slideshow
+  const heroMedia = document.querySelector("[data-hero]");
+  if (heroMedia) {
+    const hero = heroMedia.closest(".hero");
+    const slides = Array.from(heroMedia.querySelectorAll(".hero__slide"));
+    const dots = Array.from(hero.querySelectorAll(".hero__dot"));
+    const DELAY = 6000;
+    let current = 0;
+    let timer = null;
+    let paused = false;
+    hero.style.setProperty("--hero-delay", `${DELAY}ms`);
+
+    const show = (i) => {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => {
+        s.classList.toggle("is-active", n === current);
+        s.setAttribute("aria-hidden", String(n !== current));
+      });
+      dots.forEach((d, n) => {
+        d.classList.remove("is-active");
+        d.classList.toggle("is-done", n < current);
+        d.removeAttribute("aria-current");
+      });
+      void dots[current].offsetWidth; // restart the progress animation
+      dots[current].classList.add("is-active");
+      dots[current].setAttribute("aria-current", "true");
+    };
+    const schedule = () => {
+      clearTimeout(timer);
+      if (reduceMotion || paused) return;
+      timer = setTimeout(() => { show(current + 1); schedule(); }, DELAY);
+    };
+    const setPaused = (p) => {
+      paused = p;
+      hero.classList.toggle("is-paused", p);
+      if (p) clearTimeout(timer); else schedule();
+    };
+
+    dots.forEach((d, n) => d.addEventListener("click", () => { show(n); schedule(); }));
+    hero.addEventListener("mouseenter", () => setPaused(true));
+    hero.addEventListener("mouseleave", () => setPaused(false));
+    hero.addEventListener("focusin", () => setPaused(true));
+    hero.addEventListener("focusout", () => setPaused(false));
+    document.addEventListener("visibilitychange", () => setPaused(document.hidden));
+
+    // Preload the other slides so they appear instantly
+    slides.slice(1).forEach((s) => {
+      const m = s.style.backgroundImage.match(/url\(["']?([^"')]+)/);
+      if (m) new Image().src = m[1];
+    });
+    if (reduceMotion) hero.classList.add("is-paused");
+    show(0);
+    schedule();
+  }
+
   // Mobile menu
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("nav-menu");
