@@ -20,7 +20,7 @@ export function useScrollY() {
 }
 
 /** Fades elements matching `selector` in as they scroll into view. */
-export function useReveal(selector) {
+export function useReveal(selector, key) {
   useEffect(() => {
     if (!("IntersectionObserver" in window) || prefersReducedMotion()) return;
     const els = document.querySelectorAll(selector);
@@ -39,5 +39,5 @@ export function useReveal(selector) {
       io.observe(el);
     });
     return () => io.disconnect();
-  }, [selector]);
+  }, [selector, key]);
 }

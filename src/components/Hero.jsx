@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { heroSlides, img } from "../data.js";
 import { prefersReducedMotion } from "../hooks/index.js";
-import { Button, Tag } from "./ui.jsx";
+import { Button, Tag, bookLink } from "./ui.jsx";
 
 const DELAY = 6000;
 
-export default function Hero({ onPickService }) {
+export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [cycle, setCycle] = useState(0); // bumps to restart the progress bar on manual picks
@@ -55,7 +55,7 @@ export default function Hero({ onPickService }) {
         ))}
       </div>
 
-      <h1 className="sr-only">Bozid Dental Clinic: gentle, modern dentistry for the whole family</h1>
+      <h1 className="sr-only">Bozid Dental Clinic, Ibadan: quality, affordable dental care for the whole family</h1>
 
       <div className="wrap hero__panels">
         {heroSlides.map((s, i) => {
@@ -73,7 +73,7 @@ export default function Hero({ onPickService }) {
               </div>
               <div className="hero__side">
                 <p>{s.text}</p>
-                <Button light onClick={() => s.service && onPickService(s.service)}>{s.cta}</Button>
+                <Button light to={bookLink(s.service)}>{s.cta}</Button>
               </div>
             </div>
           );

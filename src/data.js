@@ -1,37 +1,60 @@
 // All editable site content lives here.
-// Replace the placeholders (phone, address, HMOs, team, reviews) with real details.
+// Contact details, hours, description and services come from the client discovery form.
 
 export const img = (name) => `${import.meta.env.BASE_URL}assets/img/${name}`;
 export const brand = (name) => `${import.meta.env.BASE_URL}assets/brand/${name}`;
 
+const WHATSAPP_MAIN = "2348086622159"; // 0808 662 2159 (WhatsApp and call)
+export const waLink = (text = "Hello Bozid Dental, I'd like to book an appointment.") =>
+  `https://wa.me/${WHATSAPP_MAIN}?text=${encodeURIComponent(text)}`;
+
 export const clinic = {
   name: "Bozid Dental",
   fullName: "Bozid Dental Clinic",
-  // From the Bozid Dental brand guide (letterhead and call cards)
   tagline: "Your smile, our priority.",
-  phoneDisplay: "0805 505 4102",
-  phoneHref: "tel:+2348055054102",
+  description:
+    "Bozid Dental Clinic is a trusted dental clinic in Ibadan providing quality, affordable dental care in a friendly and comfortable environment. We offer preventive, restorative and cosmetic dental services, and our goal is to make quality dental care accessible while helping every patient maintain a healthy, confident smile.",
   phones: [
-    { display: "0805 505 4102", href: "tel:+2348055054102" },
-    { display: "0706 970 7130", href: "tel:+2347069707130" },
-    { display: "0808 662 2159", href: "tel:+2348086622159" },
+    { display: "0808 662 2159", href: "tel:+2348086622159", wa: "2348086622159", label: "Call & WhatsApp", call: true },
+    { display: "0808 788 9495", href: "tel:+2348087889495", wa: "2348087889495", label: "Call & WhatsApp", call: true },
+    { display: "0909 357 1213", href: null, wa: "2349093571213", label: "WhatsApp only", call: false },
   ],
-  // Confirm which number is on WhatsApp
-  whatsapp: "https://wa.me/2348055054102?text=" + encodeURIComponent("Hello Bozid Dental, I'd like to book an appointment."),
+  primaryPhone: { display: "0808 662 2159", href: "tel:+2348086622159" },
+  whatsapp: waLink(),
+  emails: ["boziddental@gmail.com", "pmbozid@gmail.com"],
   email: "boziddental@gmail.com",
-  addressLines: ["1st Floor, Samsung Building (Liberty House)", "Opposite UI Main Gate, Ibadan"],
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Samsung Building, Liberty House, Opposite UI Main Gate, Ibadan, Nigeria"),
-  hoursShort: "Mon–Fri 8:00–18:00 · Sat 9:00–14:00",
-  hours: ["Mon–Fri 8:00–18:00", "Sat 9:00–14:00", "Sun closed"],
+  address: "Block 1, Plot 2, Opposite Capital Building/Foodco, Ring Road, Ibadan",
+  addressLines: ["Block 1, Plot 2, Opposite Capital Building/Foodco", "Ring Road, Ibadan"],
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Capital Building Foodco Ring Road Ibadan"),
+  mapEmbed: "https://www.google.com/maps?output=embed&q=" + encodeURIComponent("Foodco Ring Road Ibadan"),
+  hours: [
+    { days: "Monday – Friday", time: "8:00am – 6:00pm" },
+    { days: "Saturday", time: "9:00am – 5:00pm" },
+    { days: "Sunday", time: "Closed" },
+  ],
+  hoursShort: "Mon–Fri 8am–6pm · Sat 9am–5pm",
 };
 
 export const nav = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#why", label: "Why us" },
-  { href: "#team", label: "Team" },
-  { href: "#reviews", label: "Reviews" },
-  { href: "#faq", label: "FAQ" },
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/services", label: "Services" },
+  { to: "/team", label: "Team" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/blog", label: "Blog" },
+  { to: "/contact", label: "Contact" },
+];
+
+export const footerLinks = [
+  { to: "/about", label: "About us" },
+  { to: "/services", label: "Services" },
+  { to: "/team", label: "Our team" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/reviews", label: "Reviews" },
+  { to: "/faqs", label: "FAQs" },
+  { to: "/blog", label: "Blog" },
+  { to: "/contact", label: "Contact" },
+  { to: "/book", label: "Book an appointment" },
 ];
 
 export const heroSlides = [
@@ -40,10 +63,10 @@ export const heroSlides = [
     alt: "Dentist chatting with a father and his young son",
     position: "80% center",
     nav: "Care for the whole family",
-    tag: "Family dentistry",
-    title: "Gentle care for the whole family.",
-    text: "From first baby teeth to grandparents' check-ups: one friendly team that gets to know your family by name.",
-    cta: "Book a family visit",
+    tag: "Family dentistry in Ibadan",
+    title: "Quality dental care for the whole family.",
+    text: "Friendly, affordable dental care in a comfortable environment, from routine check-ups to complete smile makeovers.",
+    cta: "Book an appointment",
   },
   {
     image: "hero-2.jpg",
@@ -52,20 +75,20 @@ export const heroSlides = [
     nav: "Every option explained",
     tag: "Honest advice",
     title: "Every option explained before we begin.",
-    text: "Clear treatment plans, upfront prices and time for all your questions. No pressure, ever.",
-    cta: "Book a consultation",
-    service: "Not sure yet",
+    text: "On-site dental X-rays, a clear treatment plan and time for all your questions. No pressure, ever.",
+    cta: "Book a check-up",
+    service: "Dental check-up",
   },
   {
     image: "hero-3.jpg",
     alt: "Child during a gentle dental check-up",
     position: "50% center",
-    nav: "Gentle with little ones",
-    tag: "Kids' dentistry",
-    title: "Happy visits for little smiles.",
-    text: "Patient, playful care that helps children feel safe in the chair and build healthy habits for life.",
-    cta: "Book a kids' check-up",
-    service: "Kids' dentistry",
+    nav: "Gentle care for all ages",
+    tag: "For all ages",
+    title: "Gentle care from first teeth to golden years.",
+    text: "Patient, caring dentistry for children, adults and seniors, so every visit feels calm and easy.",
+    cta: "Book a family visit",
+    service: "Dental check-up",
   },
   {
     image: "hero-4.jpg",
@@ -74,77 +97,137 @@ export const heroSlides = [
     nav: "Smile with confidence",
     tag: "Cosmetic dentistry",
     title: "Smile brighter, feel more confident.",
-    text: "Whitening, veneers and gentle cosmetic care that bring out the best in your natural smile.",
+    text: "Teeth whitening, veneers, crowns and Invisalign that bring out the best in your natural smile.",
     cta: "Book a smile consultation",
-    service: "Aesthetic dentistry",
+    service: "Teeth whitening",
   },
 ];
 
 export const aboutPoints = [
-  { title: "Care for all ages", text: "From a child's first visit to implants for grandparents, the whole family in one place." },
-  { title: "Same-day emergencies", text: "We keep time free every day for toothache, swelling and broken teeth." },
-  { title: "Flexible payment", text: "Clear estimates up front and monthly plans for larger treatments." },
+  { title: "Quality, affordable care", text: "Making quality dental care accessible to everyone in our community." },
+  { title: "Everything in one place", text: "Preventive, restorative and cosmetic treatments under one roof, including on-site X-rays." },
+  { title: "Friendly & comfortable", text: "A warm, relaxed environment where every patient is treated with care." },
+];
+
+export const serviceCategories = [
+  { id: "preventive", label: "Preventive", blurb: "Keep teeth and gums healthy and catch problems early." },
+  { id: "restorative", label: "Restorative", blurb: "Repair, strengthen or replace damaged and missing teeth." },
+  { id: "cosmetic", label: "Cosmetic & orthodontic", blurb: "Brighten, reshape and straighten your smile." },
 ];
 
 export const services = [
-  { slug: "hygiene", title: "Check-ups & hygiene", service: "Check-up & hygiene", text: "Thorough exams, low-dose digital X-rays and a professional clean that keeps gums healthy and stops small problems from growing." },
-  { slug: "aesthetic", title: "Aesthetic dentistry", text: "Subtle reshaping, bonding and contouring that brings balance to your smile while keeping it looking natural." },
-  { slug: "veneers", title: "Veneers", text: "Thin, custom porcelain shells that fix chips, gaps, uneven shape or stubborn discolouration on the front teeth." },
-  { slug: "whitening", title: "Teeth whitening", text: "Safe in-chair or take-home whitening that lifts your shade noticeably without harming enamel." },
-  { slug: "implants", title: "Dental implants", text: "A lasting replacement for one, several or all missing teeth that looks, feels and works like the real thing." },
-  { slug: "ortho", title: "Clear aligners", text: "Nearly invisible aligners that straighten teeth and correct your bite, for teens and adults." },
-  { slug: "braces", title: "Braces", text: "Modern metal or tooth-coloured braces for predictable, steady results on more complex cases." },
-  { slug: "extraction", title: "Wisdom tooth removal", text: "Calm, carefully numbed removal of problem wisdom teeth, with clear aftercare so you heal quickly." },
-  { slug: "surgery", title: "Oral surgery", text: "Gentle surgical care, from difficult extractions to bone grafting, so your mouth is ready for lasting treatment." },
+  { slug: "checkup", category: "preventive", title: "Dental check-up", text: "A thorough examination of your teeth, gums and mouth to keep you healthy and spot small problems before they grow." },
+  { slug: "scaling", category: "preventive", title: "Scaling & polishing", text: "Professional cleaning that removes plaque and tartar, freshens your breath and leaves teeth smooth and bright." },
+  { slug: "radiography", category: "preventive", title: "Dental radiography (X-rays)", text: "On-site dental X-rays that show what can't be seen with the eye, for accurate diagnosis and planning." },
+  { slug: "filling", category: "restorative", title: "Tooth filling", text: "Tooth-coloured fillings that repair cavities and small breaks, restoring strength and appearance." },
+  { slug: "rootcanal", category: "restorative", title: "Root canal treatment", text: "Gentle treatment that removes infection from inside a tooth, relieves pain and saves the natural tooth." },
+  { slug: "crowns", category: "restorative", title: "Dental crowns", text: "Custom caps that cover and protect weak, cracked or heavily filled teeth while looking natural." },
+  { slug: "bridges", category: "restorative", title: "Dental bridges", text: "A fixed replacement for one or more missing teeth, anchored to the teeth on either side." },
+  { slug: "dentures", category: "restorative", title: "Dentures", text: "Comfortable, natural-looking full or partial dentures that restore your smile and your bite." },
+  { slug: "implants", category: "restorative", title: "Dental implants", text: "A long-lasting replacement for missing teeth that looks, feels and works like a natural tooth." },
+  { slug: "extraction", category: "restorative", title: "Tooth extraction", text: "Careful, well-numbed removal of teeth that can't be saved, with clear aftercare advice." },
+  { slug: "whitening", category: "cosmetic", title: "Teeth whitening", text: "Safe, professional whitening that lifts stains and brightens your smile noticeably." },
+  { slug: "veneers", category: "cosmetic", title: "Veneers", text: "Thin custom shells that fix chips, gaps, uneven shape or discolouration on the front teeth." },
+  { slug: "orthodontics", category: "cosmetic", title: "Orthodontics", text: "Braces and orthodontic treatment that straighten teeth and correct your bite." },
+  { slug: "invisalign", category: "cosmetic", title: "Invisalign", text: "Nearly invisible clear aligners that gradually straighten teeth, with no metal brackets or wires." },
 ];
-
-export const extraServices = ["Root canal & fillings", "Crowns & bridges", "Kids' dentistry", "Gum care"];
 
 // Options for the booking form's service dropdown
-export const serviceOptions = [
-  ...services.map((s) => s.service || s.title),
-  "Root canal / filling",
-  "Kids' dentistry",
-  "Emergency",
-  "Not sure yet",
-];
+export const serviceOptions = [...services.map((s) => s.title), "Not sure yet"];
 
 export const whyUs = [
-  { image: "value-1.jpg", kicker: "Skill you can trust", title: "Experienced clinicians", text: "A team with years of hands-on experience who keep training in the latest techniques." },
-  { image: "value-2.jpg", kicker: "Precise from day one", title: "Modern technology", text: "Digital scans and imaging for accurate diagnosis and fewer, shorter appointments." },
-  { image: "value-3.jpg", kicker: "Calm, not clinical", title: "Comfort-focused care", text: "Gentle numbing, sedation options and a relaxed pace, especially for nervous patients." },
-  { image: "value-4.jpg", kicker: "Built around you", title: "Patient-centred plans", text: "We listen first, explain every option and cost, and never push treatment you don't need." },
+  { image: "value-1.jpg", kicker: "Care you can trust", title: "Experienced team", text: "Skilled, caring dental professionals focused on getting things right for you." },
+  { image: "value-2.jpg", kicker: "Accurate from day one", title: "On-site X-rays", text: "Dental radiography in the clinic for accurate diagnosis and clear treatment plans." },
+  { image: "value-3.jpg", kicker: "Calm, not clinical", title: "Comfortable environment", text: "A friendly, relaxed space and a gentle approach, especially for nervous patients." },
+  { image: "value-4.jpg", kicker: "Accessible to all", title: "Quality, affordable care", text: "Our goal is to make quality dental care accessible to every patient." },
 ];
 
-// Only list HMOs you actually work with
-export const hmos = ["HMO partner", "HMO partner", "HMO partner", "HMO partner", "HMO partner"];
-
 export const steps = [
-  { title: "Book online or call", text: "Pick a time that suits you. We confirm within one business day." },
-  { title: "Exam & consultation", text: "A full check-up and an honest conversation about your goals." },
-  { title: "Your personal plan", text: "Clear options, timelines and costs, with no pressure." },
+  { title: "Request a visit", text: "Send the booking form or message us on WhatsApp with a time that suits you." },
+  { title: "We confirm", text: "Our team calls or messages you to confirm your appointment." },
+  { title: "Visit & plan", text: "A thorough check-up and a clear, honest plan for your smile." },
 ];
 
 // Sample reviews: replace with real testimonials (with patient permission)
 export const reviews = [
-  { text: "I used to dread the dentist. The team explained everything and I didn't feel a thing. I actually look forward to check-ups now.", name: "Patient name", detail: "Cleaning & fillings" },
-  { text: "My implant looks and feels completely natural. Everything was on time and exactly the price I was quoted.", name: "Patient name", detail: "Dental implant" },
-  { text: "Our kids love coming here. The staff are patient, fun and genuinely kind. Highly recommended for families.", name: "Patient name", detail: "Family patient" },
+  { text: "I used to dread the dentist. The team explained everything and I didn't feel a thing. I actually look forward to check-ups now.", name: "Patient name", detail: "Scaling & polishing" },
+  { text: "My new crown looks completely natural. The staff were friendly and everything was explained clearly from start to finish.", name: "Patient name", detail: "Dental crown" },
+  { text: "Our whole family comes here now. They are patient with the children and genuinely kind. Highly recommended.", name: "Patient name", detail: "Family patient" },
+  { text: "Booking on WhatsApp was so easy, and they confirmed my appointment the same day.", name: "Patient name", detail: "Dental check-up" },
 ];
 
-// Use real photos of your own staff
+// Team profiles. The client asked for qualifications, specialties, years of experience and a short bio.
+// Replace the [placeholders] and add real photos of your own staff.
 export const team = [
-  { image: "team-1.jpg", name: "Dr. Ibrahim A. Oyediran", role: "Executive Director", badge: "Leadership" },
-  { image: "team-2.jpg", name: "Dr. [Name]", role: "Orthodontist · Aligners & braces" },
-  { image: "team-3.jpg", name: "Dr. [Name]", role: "Paediatric dentist" },
-  { image: "team-4.jpg", name: "[Name]", role: "Dental hygienist" },
+  {
+    image: "team-1.jpg", name: "Dr. Ibrahim A. Oyediran", role: "Executive Director",
+    qualifications: "[Qualifications]", specialties: "[Specialties]", years: "[Years]",
+    bio: "[Short biography]",
+  },
+  { image: "team-2.jpg", name: "Dr. [Name]", role: "Dentist", qualifications: "[Qualifications]", specialties: "[Specialties]", years: "[Years]", bio: "[Short biography]" },
+  { image: "team-3.jpg", name: "Dr. [Name]", role: "Dentist", qualifications: "[Qualifications]", specialties: "[Specialties]", years: "[Years]", bio: "[Short biography]" },
+  { image: "team-4.jpg", name: "[Name]", role: "Dental hygienist", qualifications: "[Qualifications]", specialties: "[Specialties]", years: "[Years]", bio: "[Short biography]" },
 ];
 
 export const faqs = [
-  { q: "Are you accepting new patients?", a: "Yes. We welcome new patients of all ages. Book online or call to schedule your first exam." },
-  { q: "Do you accept HMOs and health insurance?", a: "Yes. We work with many HMOs and private health plans. Bring your HMO card or ID and we'll confirm what your plan covers before any treatment." },
-  { q: "What should I do in a dental emergency?", a: "Call us right away. We keep time free every day for urgent cases like severe pain, swelling or a knocked-out tooth." },
-  { q: "How often should I visit?", a: "For most people, a check-up and cleaning every six months. We may suggest more often depending on your oral health." },
-  { q: "Do you offer payment plans?", a: "Yes. Flexible monthly plans are available for larger treatments such as implants and orthodontics." },
-  { q: "How can I pay?", a: "Bank transfer, debit card (POS) or cash, plus HMO cover where it applies. You always get a clear estimate before treatment starts." },
+  { q: "Are you accepting new patients?", a: "Yes. We welcome patients of all ages. Request an appointment online or send us a WhatsApp message." },
+  { q: "How does booking work?", a: "Send the booking form on our website (or message us on WhatsApp) with your preferred date. Our team will then call or message you to confirm your appointment." },
+  { q: "Where are you located?", a: "We're at Block 1, Plot 2, Opposite Capital Building/Foodco, Ring Road, Ibadan." },
+  { q: "What are your opening hours?", a: "Monday to Friday, 8:00am to 6:00pm, and Saturday, 9:00am to 5:00pm." },
+  { q: "Do you list your prices?", a: "Every treatment is tailored to the patient, so we explain your options and costs clearly at your consultation, before any treatment begins." },
+  { q: "I have tooth pain. What should I do?", a: "Call or WhatsApp us and describe the problem. We'll advise you and arrange the earliest available appointment." },
+  { q: "How often should I visit the dentist?", a: "For most people, a check-up and scaling & polishing every six months. We may suggest a different schedule depending on your oral health." },
+];
+
+// Gallery. Add real photos to public/assets/img/gallery/ and list them here.
+// Before & after photos need written consent from the patient.
+export const gallery = {
+  beforeAfter: [
+    // { title: "Teeth whitening", before: "gallery/whitening-before.jpg", after: "gallery/whitening-after.jpg" },
+  ],
+  facilities: [
+    // { image: "gallery/reception.jpg", caption: "Our reception" },
+  ],
+};
+
+export const blogPosts = [
+  {
+    slug: "how-often-should-you-visit-the-dentist",
+    title: "How often should you visit the dentist?",
+    date: "2026-11-10",
+    image: "service-checkup.jpg",
+    excerpt: "Regular check-ups are the simplest way to keep your teeth healthy. Here's how often to come in, and why it matters.",
+    body: [
+      "For most adults and children, a dental check-up every six months is a good rhythm. It gives your dentist the chance to spot small problems, such as early decay or gum inflammation, while they are still quick and simple to treat.",
+      "Some people benefit from more frequent visits, for example if you have gum disease, a history of cavities, or wear braces. Others with excellent oral health may be advised to come a little less often. Your dentist will recommend the right schedule for you.",
+      "A typical check-up includes an examination of your teeth, gums and mouth, and X-rays when needed. It's also a good time to ask questions about brushing, flossing, diet or any changes you've noticed.",
+      "Don't wait for pain. Many dental problems develop quietly, so regular visits are the best way to keep your smile healthy and avoid bigger treatment later.",
+    ],
+  },
+  {
+    slug: "scaling-and-polishing-what-to-expect",
+    title: "Scaling and polishing: what to expect",
+    date: "2026-11-03",
+    image: "service-scaling.jpg",
+    excerpt: "A professional clean removes the build-up that brushing can't reach. Here's what happens during scaling and polishing.",
+    body: [
+      "Even with careful brushing, plaque can harden into tartar (calculus), especially along the gum line. Tartar can't be removed with a toothbrush, and over time it can irritate the gums and lead to gum disease.",
+      "During scaling, your dentist or hygienist gently removes tartar from the surfaces of your teeth and just below the gum line. Polishing then smooths the teeth and removes surface stains, leaving them feeling clean and fresh.",
+      "Most people find scaling comfortable. If your gums are sensitive, let your dentist know so they can take extra care. You may notice slight sensitivity for a day or two afterwards, which usually settles quickly.",
+      "Regular scaling and polishing, usually every six months, helps keep your gums healthy, freshens your breath and keeps your smile looking its best.",
+    ],
+  },
+  {
+    slug: "is-teeth-whitening-safe",
+    title: "Is teeth whitening safe?",
+    date: "2026-10-27",
+    image: "service-whitening.jpg",
+    excerpt: "Professional whitening can brighten your smile safely. Here's what to know before you start.",
+    body: [
+      "Professional teeth whitening, carried out or supervised by a dentist, is a safe and effective way to lighten stains caused by food, drinks, smoking and age.",
+      "Before whitening, your dentist will check that your teeth and gums are healthy. Problems such as cavities or gum disease should be treated first, and existing crowns, veneers or fillings won't change colour, which is worth planning for.",
+      "Some people feel temporary sensitivity during or after whitening. Your dentist can adjust the treatment and recommend products to keep you comfortable.",
+      "Avoid unregulated whitening products bought online, which can contain harmful ingredients or damage your enamel and gums. If you'd like a brighter smile, book a consultation and we'll recommend the best option for you.",
+    ],
+  },
 ];

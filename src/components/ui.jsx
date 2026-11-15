@@ -1,18 +1,24 @@
+import { Link } from "react-router-dom";
 import { brand, img } from "../data.js";
 
-export function Button({ href = "#book", light, block, children, onClick, ...rest }) {
-  const cls = ["btn", light && "btn--light", block && "btn--block"].filter(Boolean).join(" ");
+/**
+ * Pill button with the round arrow. Internal pages use `to` (router link),
+ * external links use `href`, form buttons use `type`.
+ */
+export function Button({ to, href, light, block, outline, children, className = "", ...rest }) {
+  const cls = ["btn", light && "btn--light", block && "btn--block", outline && "btn--outline", className].filter(Boolean).join(" ");
   const inner = (
     <>
       {children}
       <span className="btn__arrow" aria-hidden="true">→</span>
     </>
   );
-  if (rest.type) {
-    return <button className={cls} onClick={onClick} {...rest}>{inner}</button>;
-  }
-  return <a href={href} className={cls} onClick={onClick} {...rest}>{inner}</a>;
+  if (rest.type) return <button className={cls} {...rest}>{inner}</button>;
+  if (href) return <a href={href} className={cls} {...rest}>{inner}</a>;
+  return <Link to={to ?? "/book"} className={cls} {...rest}>{inner}</Link>;
 }
+
+export const bookLink = (service) => (service ? `/book?service=${encodeURIComponent(service)}` : "/book");
 
 export function Tag({ light, children }) {
   return <span className={light ? "tag tag--light" : "tag"}>{children}</span>;
@@ -46,9 +52,26 @@ export function Photo({ name, className = "", label, style, children }) {
 /** Official Bozid Dental logo (brand guide). `white` for dark backgrounds. */
 export function Logo({ white = false }) {
   return (
-    <a href="#top" className="logo" aria-label="Bozid Dental home">
+    <Link to="/" className="logo" aria-label="Bozid Dental home">
       <img src={brand(white ? "logo-white.png" : "logo.png")} alt="Bozid Dental" width="473" height="240" />
-    </a>
+    </Link>
+  );
+}
+
+/** Deep-blue banner at the top of inner pages. */
+export function PageHero({ tag, title, children, crumb }) {
+  return (
+    <section className="page-hero">
+      <img className="page-hero__smile" src={brand("smile-white.png")} alt="" aria-hidden="true" />
+      <div className="wrap">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          <Link to="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">{crumb ?? title}</span>
+        </nav>
+        {tag && <Tag light>{tag}</Tag>}
+        <h1 className="page-hero__title">{title}</h1>
+        {children && <p className="page-hero__lead">{children}</p>}
+      </div>
+    </section>
   );
 }
 

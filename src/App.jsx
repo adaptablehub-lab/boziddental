@@ -1,53 +1,64 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header.jsx";
-import Hero from "./components/Hero.jsx";
-import Booking from "./components/Booking.jsx";
 import { Footer, WhatsAppFab } from "./components/Footer.jsx";
-import { About, Cta, Faq, FirstVisit, Partners, Reviews, Services, Team, WhyUs } from "./components/Sections.jsx";
 import { useReveal, useScrollY } from "./hooks/index.js";
+import * as P from "./pages/index.jsx";
 
-export default function App() {
-  // Service chosen in the booking form; "Book" buttons around the page pre-select it
-  const [service, setService] = useState("");
+function Layout() {
+  const { pathname, search } = useLocation();
   const scrollY = useScrollY();
   const viewport = typeof window !== "undefined" ? window.innerHeight : 800;
 
-  // Hide the floating WhatsApp button where it would cover the form or footer
-  // (both already show WhatsApp links)
+  // Start each page at the top
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+
+  // Hide the floating WhatsApp button where it would cover the booking form or footer
   const [overlapping, setOverlapping] = useState(false);
   useEffect(() => {
-    const targets = [document.getElementById("book"), document.querySelector(".footer")].filter(Boolean);
+    const targets = [document.querySelector(".form"), document.querySelector(".footer")].filter(Boolean);
     const seen = new Map();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => seen.set(e.target, e.isIntersecting));
       setOverlapping([...seen.values()].some(Boolean));
     }, { rootMargin: "0px 0px -15% 0px" });
     targets.forEach((t) => io.observe(t));
-    return () => io.disconnect();
-  }, []);
+    return () => { io.disconnect(); setOverlapping(false); };
+  }, [pathname]);
 
-  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .book > *, .faq-wrap > *, .cta");
+  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-card, .post-card, .faq-wrap > *, .cta", pathname + search);
 
+  const isHome = pathname === "/";
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <Header scrolled={scrollY > 60} />
-      <main id="main">
-        <Hero onPickService={setService} />
-        <About />
-        <Services onPickService={setService} />
-        <WhyUs />
-        <Partners />
-        <FirstVisit />
-        <Reviews />
-        <Team />
-        <Booking service={service} setService={setService} />
-        <Faq />
-        <Cta />
-      </main>
-      {/* shown once the visitor scrolls past most of the hero */}
-      <WhatsAppFab visible={scrollY > viewport * 0.6 && !overlapping} />
+      <main id="main"><Outlet /></main>
+      <WhatsAppFab visible={scrollY > (isHome ? viewport * 0.6 : 240) && !overlapping} />
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<P.Home />} />
+          <Route path="about" element={<P.About />} />
+          <Route path="services" element={<P.Services />} />
+          <Route path="team" element={<P.Team />} />
+          <Route path="gallery" element={<P.Gallery />} />
+          <Route path="reviews" element={<P.Reviews />} />
+          <Route path="faqs" element={<P.Faqs />} />
+          <Route path="blog" element={<P.Blog />} />
+          <Route path="blog/:slug" element={<P.BlogPost />} />
+          <Route path="contact" element={<P.Contact />} />
+          <Route path="book" element={<P.Book />} />
+          <Route path="*" element={<P.NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

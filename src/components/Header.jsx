@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { nav } from "../data.js";
 import { Button, Logo } from "./ui.jsx";
 
 export default function Header({ scrolled }) {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // Close the mobile menu whenever the page changes
+  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -12,7 +17,6 @@ export default function Header({ scrolled }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const close = () => setOpen(false);
   const cls = ["header", scrolled && "is-scrolled", open && "menu-open"].filter(Boolean).join(" ");
 
   return (
@@ -22,12 +26,12 @@ export default function Header({ scrolled }) {
         <nav aria-label="Main">
           <ul className={open ? "nav is-open" : "nav"} id="nav-menu">
             {nav.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} onClick={close}>{item.label}</a>
+              <li key={item.to}>
+                <NavLink to={item.to} end={item.to === "/"}>{item.label}</NavLink>
               </li>
             ))}
             <li className="nav__cta">
-              <Button light onClick={close}>Book a visit</Button>
+              <Button light to="/book">Book appointment</Button>
             </li>
           </ul>
         </nav>

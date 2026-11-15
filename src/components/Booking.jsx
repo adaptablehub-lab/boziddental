@@ -1,88 +1,105 @@
-import { useState } from "react";
-import { clinic, serviceOptions } from "../data.js";
-import { Button, Tag } from "./ui.jsx";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { clinic, serviceOptions, waLink } from "../data.js";
+import { WhatsAppIcon } from "./ui.jsx";
 
-const empty = { name: "", phone: "", email: "", date: "", message: "" };
+const empty = { name: "", phone: "", email: "", service: "", date: "", time: "", message: "" };
 const today = () => new Date().toISOString().split("T")[0];
+const required = ["name", "phone", "service", "date"];
 
-export default function Booking({ service, setService }) {
+/**
+ * Appointment request form. Per the client: "website form followed by confirmation from Bozid".
+ * Without a server, the request is sent through the patient's WhatsApp (preferred) or email app.
+ * To receive requests directly, connect a form service (e.g. Formspree) in `send()`.
+ */
+export default function BookingForm() {
+  const [params] = useSearchParams();
   const [form, setForm] = useState(empty);
   const [invalid, setInvalid] = useState({});
-  const [status, setStatus] = useState(null); // { ok: boolean, text: string }
+  const [status, setStatus] = useState(null);
+
+  // Pre-select the service when arriving from a "Book this treatment" link
+  useEffect(() => {
+    const s = params.get("service");
+    if (s && serviceOptions.includes(s)) setForm((f) => ({ ...f, service: s }));
+  }, [params]);
 
   const update = (e) => {
     const { name, value } = e.target;
-    if (name === "service") setService(value);
-    else setForm((f) => ({ ...f, [name]: value }));
+    setForm((f) => ({ ...f, [name]: value }));
     setInvalid((v) => ({ ...v, [name]: false }));
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-    const values = { ...form, service };
+  const validate = () => {
     const bad = {};
-    ["name", "phone", "email", "service", "date"].forEach((k) => {
-      if (!String(values[k]).trim()) bad[k] = true;
-    });
-    if (values.email && !/^\S+@\S+\.\S+$/.test(values.email)) bad.email = true;
+    required.forEach((k) => { if (!form[k].trim()) bad[k] = true; });
+    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) bad.email = true;
     setInvalid(bad);
-    if (Object.keys(bad).length) {
-      setStatus({ ok: false, text: "Please fill in all required fields." });
-      return;
-    }
-
-    // TODO: connect to a form service (e.g. Formspree) to receive requests directly.
-    const body = [
-      `Name: ${values.name}`, `Phone: ${values.phone}`, `Email: ${values.email}`,
-      `Service: ${values.service}`, `Preferred date: ${values.date}`, `Message: ${values.message || "-"}`,
-    ].join("\n");
-    window.location.href = `mailto:${clinic.email}?subject=${encodeURIComponent("Appointment request: " + values.service)}&body=${encodeURIComponent(body)}`;
-
-    setStatus({ ok: true, text: "Thank you! Your email app should open to send the request. We'll confirm within one business day." });
-    setForm(empty);
-    setService("");
+    return !Object.keys(bad).length;
   };
 
-  const field = (name) => ({ name, value: form[name], onChange: update, className: invalid[name] ? "is-invalid" : undefined, "aria-invalid": invalid[name] || undefined });
+  const summary = () => [
+    "Hello Bozid Dental, I'd like to request an appointment.",
+    "",
+    `Name: ${form.name}`,
+    `Phone: ${form.phone}`,
+    form.email ? `Email: ${form.email}` : null,
+    `Service: ${form.service}`,
+    `Preferred date: ${form.date}${form.time ? `, ${form.time}` : ""}`,
+    form.message ? `Message: ${form.message}` : null,
+  ].filter((l) => l !== null).join("\n");
+
+  const send = (via) => {
+    if (!validate()) {
+      setStatus({ ok: false, text: "Please fill in the highlighted fields." });
+      return;
+    }
+    const text = summary();
+    if (via === "whatsapp") {
+      window.open(waLink(text), "_blank", "noopener");
+    } else {
+      window.location.href = `mailto:${clinic.email}?subject=${encodeURIComponent("Appointment request: " + form.service)}&body=${encodeURIComponent(text)}`;
+    }
+    setStatus({ ok: true, text: "Thank you! Please send the message that just opened. Our team will call or message you to confirm your appointment." });
+  };
+
+  const field = (name) => ({
+    name, value: form[name], onChange: update,
+    className: invalid[name] ? "is-invalid" : undefined,
+    "aria-invalid": invalid[name] || undefined,
+  });
 
   return (
-    <section className="section section--grey" id="book">
-      <div className="wrap book">
-        <div>
-          <Tag>Book an appointment</Tag>
-          <h2 className="h-lg">Ready for a healthier smile?</h2>
-          <p className="muted">Send your preferred date and we'll confirm within one business day. In pain? Call or WhatsApp us directly.</p>
-          <ul className="contact">
-            <li><small>Phone</small><span className="contact__phones">{clinic.phones.map((ph) => <a key={ph.href} href={ph.href}>{ph.display}</a>)}</span></li>
-            <li><small>WhatsApp</small><a href={clinic.whatsapp} target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp</a></li>
-            <li><small>Email</small><a href={`mailto:${clinic.email}`}>{clinic.email}</a></li>
-            <li><small>Address</small><span>{clinic.addressLines.join(", ")} · <a href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a></span></li>
-            <li><small>Hours</small><span>{clinic.hoursShort}</span></li>
-          </ul>
-        </div>
-
-        <form className="form" onSubmit={submit} noValidate>
-          <div className="form__row">
-            <label>Full name<input type="text" autoComplete="name" required {...field("name")} /></label>
-            <label>Phone<input type="tel" autoComplete="tel" required {...field("phone")} /></label>
-          </div>
-          <label>Email<input type="email" autoComplete="email" required {...field("email")} /></label>
-          <div className="form__row">
-            <label>Service
-              <select name="service" value={service} onChange={update} required className={invalid.service ? "is-invalid" : undefined}>
-                <option value="">Choose a service</option>
-                {serviceOptions.map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </label>
-            <label>Preferred date<input type="date" min={today()} required {...field("date")} /></label>
-          </div>
-          <label>Message <span className="muted">(optional)</span><textarea rows={3} {...field("message")} /></label>
-          <Button type="submit" block>Request appointment</Button>
-          <p className={status ? `form__status ${status.ok ? "is-ok" : "is-err"}` : "form__status"} role="status" aria-live="polite">
-            {status?.text}
-          </p>
-        </form>
+    <form className="form" onSubmit={(e) => { e.preventDefault(); send("whatsapp"); }} noValidate>
+      <div className="form__row">
+        <label>Full name *<input type="text" autoComplete="name" required {...field("name")} /></label>
+        <label>Phone number *<input type="tel" autoComplete="tel" inputMode="tel" placeholder="e.g. 0803 000 0000" required {...field("phone")} /></label>
       </div>
-    </section>
+      <label>Email <span className="muted">(optional)</span><input type="email" autoComplete="email" {...field("email")} /></label>
+      <label>Service *
+        <select required {...field("service")}>
+          <option value="">Choose a service</option>
+          {serviceOptions.map((o) => <option key={o}>{o}</option>)}
+        </select>
+      </label>
+      <div className="form__row">
+        <label>Preferred date *<input type="date" min={today()} required {...field("date")} /></label>
+        <label>Preferred time
+          <select {...field("time")}>
+            <option value="">Any time</option>
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Evening (weekdays)</option>
+          </select>
+        </label>
+      </div>
+      <label>Message <span className="muted">(optional)</span><textarea rows={3} {...field("message")} /></label>
+      <div className="form__actions">
+        <button type="submit" className="btn btn--wa btn--block"><WhatsAppIcon />Send request via WhatsApp</button>
+        <button type="button" className="btn btn--outline btn--block" onClick={() => send("email")}>Send by email instead</button>
+      </div>
+      <p className="form__hint">We'll call or message you to confirm your appointment.</p>
+      <p className={status ? `form__status ${status.ok ? "is-ok" : "is-err"}` : "form__status"} role="status" aria-live="polite">{status?.text}</p>
+    </form>
   );
 }

@@ -2,8 +2,10 @@
 
 A fast, responsive, single-page website for Bozid Dental Clinic, built with **React** and **Vite**.
 
-## Sections
-Full-screen hero · About · Services (9 numbered, expandable) · Why choose us (scrolling cards) · Insurance partners · First visit · Reviews · Team · Booking form · FAQ · Call-to-action banner · Footer
+## Pages
+Home · About · Services (14, filterable) · Team · Gallery (before/after + clinic) · Reviews · FAQs · Blog (+ articles) · Contact · Book an appointment
+
+Content follows the client discovery form (Oct 2026): contact details, hours, description, the 14 services offered, booking by form + confirmation, WhatsApp, no public prices.
 
 ## Run locally
 Requires Node.js 20+.
@@ -23,7 +25,8 @@ Follows the *Bozid Dental Brand Guide*:
 - **Type:** Bariol Bold for headings and Helvetica Neue for body text. Bariol isn't a free web font, so **Nunito** stands in for it until a Bariol web-font licence is added (add an `@font-face` for "Bariol" and it takes over automatically).
 
 ## Where things live
-- `src/data.js`: **all text and contact details** (phone, WhatsApp, address, hours, services, FAQs, team, reviews, HMOs). Edit this file to change content.
+- `src/data.js`: **all text and contact details**: phones, WhatsApp, emails, address, hours, services, FAQs, team, reviews, gallery and blog posts. Edit this file to change content.
+- `src/pages/index.jsx`: one component per page; routes are in `src/App.jsx`
 - `src/components/`: one React component per section
 - `src/styles.css`: all styling
 - `public/assets/img/`: photos (replace a file with one of the same name to swap a photo)
@@ -32,21 +35,19 @@ Follows the *Bozid Dental Brand Guide*:
 Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file in `public/assets/img/` with your own photo **using the same file name** (for example `hero-1.jpg`). No code changes are needed.
 
 - `hero-1…4.jpg`: the four hero slides, wide photos (about 1800×1200). Slides 1 and 4 are your own photos
-- `service-*.jpg`: one per service (hygiene, aesthetic, veneers, whitening, implants, ortho, braces, extraction, surgery), about 800×600
+- `service-*.jpg`: one per service (14), about 1000px wide
 - `value-1…4.jpg`: tall photos for the "Why choose us" cards (about 760×1010)
 - `first-visit.jpg`: dentist with a patient (portrait)
 - `team-1…4.jpg`: team portraits (portrait)
 - `cta.jpg`: wide photo for the bottom banner
 
-## Things to confirm or customise (in `src/data.js`)
-Contact details come from the brand guide's letterhead: address (1st Floor, Samsung Building (Liberty House), Opposite UI Main Gate, Ibadan), email boziddental@gmail.com and phones 0805 505 4102, 0706 970 7130, 0808 662 2159.
-- **WhatsApp number:** currently 0805 505 4102. Change `whatsapp` if a different line is on WhatsApp
-- Opening hours
-- HMO partner names (`HMO partner` ×5): list only HMOs you actually work with
-- Team names and photos (`[Name]` placeholders)
-- Sample reviews (use real testimonials, with patient permission)
+## Still needed from the clinic (all in `src/data.js`)
+- **Team:** the client was "not sure" about featuring staff. Profiles are set up with the fields they asked for (qualifications, specialties, years of experience, short bio) but need real details and photos, or remove the Team page from `nav`.
+- **Gallery:** add before/after photos (with written patient consent) and clinic photos to `public/assets/img/gallery/`, then list them in `gallery`. Until then the page shows a "coming soon" message.
+- **Reviews:** replace the sample testimonials with real ones (with permission).
+- **Blog:** three starter articles are included; add more to `blogPosts`.
 
-The booking form currently opens the visitor's email client. To receive submissions directly, connect it to a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
+The booking form sends the request through the patient's WhatsApp (to 0808 662 2159) or email app, and the clinic confirms. To receive submissions directly on a server, connect a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 
 ## Deploy
 Every push to `main` builds the site and publishes it to GitHub Pages automatically (see `.github/workflows/deploy.yml`).
@@ -63,15 +64,20 @@ Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexel
 | hero-4.jpg | Provided by the clinic |
 | cta.jpg | https://www.pexels.com/photo/287237/ |
 | first-visit.jpg | https://www.pexels.com/photo/5355867/ |
-| service-hygiene.jpg | https://www.pexels.com/photo/5355705/ |
-| service-aesthetic.jpg | https://www.pexels.com/photo/10883310/ |
+| service-checkup.jpg | https://www.pexels.com/photo/5355705/ |
 | service-veneers.jpg | https://www.pexels.com/photo/36763563/ |
 | service-whitening.jpg | https://www.pexels.com/photo/3845686/ |
 | service-implants.jpg | https://www.pexels.com/photo/6502305/ |
-| service-ortho.jpg | https://www.pexels.com/photo/3845985/ |
-| service-braces.jpg | https://www.pexels.com/photo/6502309/ |
+| service-invisalign.jpg | https://www.pexels.com/photo/3845985/ |
+| service-orthodontics.jpg | https://www.pexels.com/photo/6502309/ |
+| service-scaling.jpg | https://www.pexels.com/photo/16903478/ |
+| service-radiography.jpg | https://www.pexels.com/photo/6501862/ |
+| service-filling.jpg | https://www.pexels.com/photo/6627594/ |
+| service-crowns.jpg | https://www.pexels.com/photo/33748061/ |
+| service-bridges.jpg | https://www.pexels.com/photo/12712256/ |
+| service-dentures.jpg | https://www.pexels.com/photo/6627607/ |
 | service-extraction.jpg | https://www.pexels.com/photo/11756810/ |
-| service-surgery.jpg | https://www.pexels.com/photo/16903641/ |
+| service-rootcanal.jpg | https://www.pexels.com/photo/16903641/ |
 | value-1.jpg | https://www.pexels.com/photo/11756843/ |
 | value-2.jpg | https://www.pexels.com/photo/3845680/ |
 | value-3.jpg | https://www.pexels.com/photo/3881145/ |
