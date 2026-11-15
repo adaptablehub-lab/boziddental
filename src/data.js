@@ -40,8 +40,6 @@ export const nav = [
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
   { to: "/team", label: "Team" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -49,10 +47,8 @@ export const footerLinks = [
   { to: "/about", label: "About us" },
   { to: "/services", label: "Services" },
   { to: "/team", label: "Our team" },
-  { to: "/gallery", label: "Gallery" },
   { to: "/reviews", label: "Reviews" },
   { to: "/faqs", label: "FAQs" },
-  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
   { to: "/book", label: "Book an appointment" },
 ];
@@ -177,57 +173,4 @@ export const faqs = [
   { q: "Do you list your prices?", a: "Every treatment is tailored to the patient, so we explain your options and costs clearly at your consultation, before any treatment begins." },
   { q: "I have tooth pain. What should I do?", a: "Call or WhatsApp us and describe the problem. We'll advise you and arrange the earliest available appointment." },
   { q: "How often should I visit the dentist?", a: "For most people, a check-up and scaling & polishing every six months. We may suggest a different schedule depending on your oral health." },
-];
-
-// Gallery. Add real photos to public/assets/img/gallery/ and list them here.
-// Before & after photos need written consent from the patient.
-export const gallery = {
-  beforeAfter: [
-    // { title: "Teeth whitening", before: "gallery/whitening-before.jpg", after: "gallery/whitening-after.jpg" },
-  ],
-  facilities: [
-    // { image: "gallery/reception.jpg", caption: "Our reception" },
-  ],
-};
-
-export const blogPosts = [
-  {
-    slug: "how-often-should-you-visit-the-dentist",
-    title: "How often should you visit the dentist?",
-    date: "2026-11-10",
-    image: "service-checkup.jpg",
-    excerpt: "Regular check-ups are the simplest way to keep your teeth healthy. Here's how often to come in, and why it matters.",
-    body: [
-      "For most adults and children, a dental check-up every six months is a good rhythm. It gives your dentist the chance to spot small problems, such as early decay or gum inflammation, while they are still quick and simple to treat.",
-      "Some people benefit from more frequent visits, for example if you have gum disease, a history of cavities, or wear braces. Others with excellent oral health may be advised to come a little less often. Your dentist will recommend the right schedule for you.",
-      "A typical check-up includes an examination of your teeth, gums and mouth, and X-rays when needed. It's also a good time to ask questions about brushing, flossing, diet or any changes you've noticed.",
-      "Don't wait for pain. Many dental problems develop quietly, so regular visits are the best way to keep your smile healthy and avoid bigger treatment later.",
-    ],
-  },
-  {
-    slug: "scaling-and-polishing-what-to-expect",
-    title: "Scaling and polishing: what to expect",
-    date: "2026-11-03",
-    image: "service-scaling.jpg",
-    excerpt: "A professional clean removes the build-up that brushing can't reach. Here's what happens during scaling and polishing.",
-    body: [
-      "Even with careful brushing, plaque can harden into tartar (calculus), especially along the gum line. Tartar can't be removed with a toothbrush, and over time it can irritate the gums and lead to gum disease.",
-      "During scaling, your dentist or hygienist gently removes tartar from the surfaces of your teeth and just below the gum line. Polishing then smooths the teeth and removes surface stains, leaving them feeling clean and fresh.",
-      "Most people find scaling comfortable. If your gums are sensitive, let your dentist know so they can take extra care. You may notice slight sensitivity for a day or two afterwards, which usually settles quickly.",
-      "Regular scaling and polishing, usually every six months, helps keep your gums healthy, freshens your breath and keeps your smile looking its best.",
-    ],
-  },
-  {
-    slug: "is-teeth-whitening-safe",
-    title: "Is teeth whitening safe?",
-    date: "2026-10-27",
-    image: "service-whitening.jpg",
-    excerpt: "Professional whitening can brighten your smile safely. Here's what to know before you start.",
-    body: [
-      "Professional teeth whitening, carried out or supervised by a dentist, is a safe and effective way to lighten stains caused by food, drinks, smoking and age.",
-      "Before whitening, your dentist will check that your teeth and gums are healthy. Problems such as cavities or gum disease should be treated first, and existing crowns, veneers or fillings won't change colour, which is worth planning for.",
-      "Some people feel temporary sensitivity during or after whitening. Your dentist can adjust the treatment and recommend products to keep you comfortable.",
-      "Avoid unregulated whitening products bought online, which can contain harmful ingredients or damage your enamel and gums. If you'd like a brighter smile, book a consultation and we'll recommend the best option for you.",
-    ],
-  },
 ];

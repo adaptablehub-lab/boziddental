@@ -26,7 +26,7 @@ function Layout() {
     return () => { io.disconnect(); setOverlapping(false); };
   }, [pathname]);
 
-  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-card, .post-card, .faq-wrap > *, .cta", pathname + search);
+  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-card, .faq-wrap > *, .cta", pathname + search);
 
   const isHome = pathname === "/";
   return (
@@ -49,11 +49,8 @@ export default function App() {
           <Route path="about" element={<P.About />} />
           <Route path="services" element={<P.Services />} />
           <Route path="team" element={<P.Team />} />
-          <Route path="gallery" element={<P.Gallery />} />
           <Route path="reviews" element={<P.Reviews />} />
           <Route path="faqs" element={<P.Faqs />} />
-          <Route path="blog" element={<P.Blog />} />
-          <Route path="blog/:slug" element={<P.BlogPost />} />
           <Route path="contact" element={<P.Contact />} />
           <Route path="book" element={<P.Book />} />
           <Route path="*" element={<P.NotFound />} />

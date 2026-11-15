@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  aboutPoints, blogPosts, brand, clinic, faqs, gallery, img, reviews, serviceCategories, services, steps, team, waLink, whyUs,
+  aboutPoints, brand, clinic, faqs, reviews, serviceCategories, services, steps, team, waLink, whyUs,
 } from "../data.js";
 import { prefersReducedMotion } from "../hooks/index.js";
 import { Button, Photo, SectionHead, Tag, WhatsAppIcon, bookLink } from "./ui.jsx";
@@ -299,105 +299,6 @@ export function FaqList({ items = faqs, title = "Common questions", withIntro = 
             );
           })}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Gallery ---------- */
-function BeforeAfter({ item }) {
-  const [pos, setPos] = useState(50);
-  return (
-    <figure className="ba">
-      <div className="ba__frame" style={{ "--pos": `${pos}%` }}>
-        <img src={img(item.after)} alt={`${item.title}: after`} />
-        <img className="ba__before" src={img(item.before)} alt={`${item.title}: before`} />
-        <span className="ba__label ba__label--l">Before</span>
-        <span className="ba__label ba__label--r">After</span>
-        <input className="ba__range" type="range" min="0" max="100" value={pos} onChange={(e) => setPos(+e.target.value)} aria-label={`Compare before and after: ${item.title}`} />
-      </div>
-      <figcaption>{item.title}</figcaption>
-    </figure>
-  );
-}
-
-export function GallerySections() {
-  const { beforeAfter, facilities } = gallery;
-  return (
-    <>
-      <section className="section">
-        <div className="wrap">
-          <SectionHead tag="Before & after" title="Real smiles, real results">
-            {beforeAfter.length ? "Drag the slider to compare. Shared with our patients' permission." : "Results from real Bozid Dental patients, shared with their permission."}
-          </SectionHead>
-          {beforeAfter.length ? (
-            <div className="ba-grid">{beforeAfter.map((b) => <BeforeAfter key={b.title + b.before} item={b} />)}</div>
-          ) : (
-            <ComingSoon text="Before-and-after photos of our patients' results are coming soon." />
-          )}
-        </div>
-      </section>
-      <section className="section section--grey">
-        <div className="wrap">
-          <SectionHead tag="Our clinic" title="A clean, modern and welcoming space">
-            Take a look around our clinic on Ring Road, Ibadan.
-          </SectionHead>
-          {facilities.length ? (
-            <div className="facility-grid">
-              {facilities.map((f) => (
-                <figure key={f.image}><Photo name={f.image} className="facility__img" label={f.caption} /><figcaption>{f.caption}</figcaption></figure>
-              ))}
-            </div>
-          ) : (
-            <ComingSoon text="Photos of our clinic and facilities are coming soon. Better still, come and visit us!" />
-          )}
-        </div>
-      </section>
-    </>
-  );
-}
-
-function ComingSoon({ text }) {
-  return (
-    <div className="coming-soon">
-      <img src={brand("smile.png")} alt="" aria-hidden="true" />
-      <p>{text}</p>
-      <div className="btn-row">
-        <Button to="/book">Book a visit</Button>
-        <a className="btn btn--wa" href={waLink()} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />WhatsApp us</a>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Blog ---------- */
-export const formatDate = (d) => new Date(d + "T12:00:00").toLocaleDateString("en-NG", { day: "numeric", month: "long", year: "numeric" });
-
-export function BlogCards({ limit }) {
-  const posts = limit ? blogPosts.slice(0, limit) : blogPosts;
-  return (
-    <div className="blog-grid">
-      {posts.map((p) => (
-        <Link to={`/blog/${p.slug}`} className="post-card" key={p.slug}>
-          <Photo name={p.image} className="post-card__img" />
-          <div className="post-card__body">
-            <time dateTime={p.date}>{formatDate(p.date)}</time>
-            <h3>{p.title}</h3>
-            <p>{p.excerpt}</p>
-            <span className="text-link">Read article →</span>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-export function BlogPreview() {
-  return (
-    <section className="section">
-      <div className="wrap">
-        <SectionHead tag="From our blog" title="Tips for a healthier smile" aside={<Button to="/blog">All articles</Button>} />
-        <BlogCards limit={3} />
       </div>
     </section>
   );

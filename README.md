@@ -3,7 +3,7 @@
 A fast, responsive, single-page website for Bozid Dental Clinic, built with **React** and **Vite**.
 
 ## Pages
-Home · About · Services (14, filterable) · Team · Gallery (before/after + clinic) · Reviews · FAQs · Blog (+ articles) · Contact · Book an appointment
+Home · About · Services (14, filterable) · Team · Reviews · FAQs · Contact · Book an appointment
 
 Content follows the client discovery form (Oct 2026): contact details, hours, description, the 14 services offered, booking by form + confirmation, WhatsApp, no public prices.
 
@@ -25,7 +25,7 @@ Follows the *Bozid Dental Brand Guide*:
 - **Type:** Bariol Bold for headings and Helvetica Neue for body text. Bariol isn't a free web font, so **Nunito** stands in for it until a Bariol web-font licence is added (add an `@font-face` for "Bariol" and it takes over automatically).
 
 ## Where things live
-- `src/data.js`: **all text and contact details**: phones, WhatsApp, emails, address, hours, services, FAQs, team, reviews, gallery and blog posts. Edit this file to change content.
+- `src/data.js`: **all text and contact details**: phones, WhatsApp, emails, address, hours, services, FAQs, team and reviews. Edit this file to change content.
 - `src/pages/index.jsx`: one component per page; routes are in `src/App.jsx`
 - `src/components/`: one React component per section
 - `src/styles.css`: all styling
@@ -43,9 +43,7 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 
 ## Still needed from the clinic (all in `src/data.js`)
 - **Team:** the client was "not sure" about featuring staff. Profiles are set up with the fields they asked for (qualifications, specialties, years of experience, short bio) but need real details and photos, or remove the Team page from `nav`.
-- **Gallery:** add before/after photos (with written patient consent) and clinic photos to `public/assets/img/gallery/`, then list them in `gallery`. Until then the page shows a "coming soon" message.
 - **Reviews:** replace the sample testimonials with real ones (with permission).
-- **Blog:** three starter articles are included; add more to `blogPosts`.
 
 The booking form sends the request through the patient's WhatsApp (to 0808 662 2159) or email app, and the clinic confirms. To receive submissions directly on a server, connect a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 

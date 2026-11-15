@@ -1,11 +1,8 @@
 // GitHub Pages has no server-side routing, so give every page its own index.html.
 // This makes direct links (e.g. /boziddental/services) return 200 instead of the 404 fallback.
-import { readFileSync, mkdirSync, copyFileSync } from "node:fs";
+import { mkdirSync, copyFileSync } from "node:fs";
 
-const routes = ["about", "services", "team", "gallery", "reviews", "faqs", "blog", "contact", "book"];
-const data = readFileSync(new URL("../src/data.js", import.meta.url), "utf8");
-const blog = data.slice(data.indexOf("export const blogPosts"));
-for (const m of blog.matchAll(/slug:\s*"([^"]+)"/g)) routes.push(`blog/${m[1]}`);
+const routes = ["about", "services", "team", "reviews", "faqs", "contact", "book"];
 
 for (const r of routes) {
   mkdirSync(`dist/${r}`, { recursive: true });
