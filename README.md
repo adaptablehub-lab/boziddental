@@ -1,19 +1,27 @@
 # Bozid Dental Clinic Website
 
-A fast, responsive, single-page website for Bozid Dental Clinic, built with plain HTML, CSS and JavaScript. It has no build step and no dependencies.
+A fast, responsive, single-page website for Bozid Dental Clinic, built with **React** and **Vite**.
 
 ## Sections
 Full-screen hero · About · Services (9 numbered, expandable) · Why choose us (scrolling cards) · Insurance partners · First visit · Reviews · Team · Booking form · FAQ · Call-to-action banner · Footer
 
 ## Run locally
-Open `index.html` in a browser, or serve the folder:
+Requires Node.js 20+.
 
 ```bash
-python3 -m http.server 8080
+npm install
+npm run dev        # http://localhost:5173/boziddental/
+npm run build      # production build in dist/
 ```
 
+## Where things live
+- `src/data.js`: **all text and contact details** (phone, WhatsApp, address, hours, services, FAQs, team, reviews, HMOs). Edit this file to change content.
+- `src/components/`: one React component per section
+- `src/styles.css`: all styling
+- `public/assets/img/`: photos (replace a file with one of the same name to swap a photo)
+
 ## Photos
-Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file with your own photo **using the same file name** (for example `assets/img/hero.jpg`). No code changes are needed.
+Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file in `public/assets/img/` with your own photo **using the same file name** (for example `hero-1.jpg`). No code changes are needed.
 
 - `hero-1…4.jpg`: the four hero slides, wide photos (about 1800×1200). Slides 1 and 4 are your own photos
 - `service-*.jpg`: one per service (hygiene, aesthetic, veneers, whitening, implants, ortho, braces, extraction, surgery), about 800×600
@@ -23,7 +31,7 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 - `cta.jpg`: wide photo for the bottom banner
 
 ## Things to customise
-Search the code for these placeholders and replace them:
+Replace these placeholders in `src/data.js`:
 - Phone and WhatsApp number `+234 800 000 0000` / `tel:+2348000000000` / `wa.me/2348000000000`
 - Email `hello@boziddental.com`
 - Address `12 Smile Avenue, Your City, Nigeria`
@@ -32,10 +40,11 @@ Search the code for these placeholders and replace them:
 - Opening hours
 - HMO partner names (`HMO partner` ×5): list only HMOs you actually work with
 
-The booking form currently opens the visitor's email client. To receive submissions directly, connect it to a form service (Formspree, Netlify Forms, etc.) in `js/main.js`.
+The booking form currently opens the visitor's email client. To receive submissions directly, connect it to a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 
 ## Deploy
-Any static host works: GitHub Pages (Settings → Pages → deploy from `main`), Netlify or Vercel.
+Every push to `main` builds the site and publishes it to GitHub Pages automatically (see `.github/workflows/deploy.yml`).
+Live site: https://adaptablehub-lab.github.io/boziddental/
 
 ## Photo credits
 Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexels License](https://www.pexels.com/license/) (free to use, attribution not required). Replace them with your own clinic photos when you can.
