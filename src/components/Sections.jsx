@@ -82,7 +82,6 @@ export function ServicesList() {
               <article key={s.slug} id={`svc-row-${s.slug}`} className={highlight === s.slug ? "svc-card is-highlight" : "svc-card"}>
                 <div className="svc-card__media">
                   <Photo name={`service-${s.slug}.jpg`} className="svc-card__img" />
-                  <span className="svc-card__num">{String(n).padStart(2, "0")}</span>
                 </div>
                 <div className="svc-card__body">
                   <span className="svc__cat">{catLabel(s.category)}</span>
@@ -137,7 +136,6 @@ export function ServicesPreview() {
                   onClick={() => setActive(isActive ? -1 : i)}
                 >
                   <span className="cat-panel__meta">
-                    <span className="cat-panel__num">0{i + 1}</span>
                     <span className="cat-panel__count">{items.length} treatments</span>
                   </span>
                   <h3>{c.label}</h3>
@@ -169,7 +167,6 @@ function ValueCard({ v, n }) {
   return (
     <Photo name={v.image} className="value">
       <div className="value__top">
-        <span className="value__num">0{n}</span>
         <span className="value__kicker">{v.kicker}</span>
       </div>
       <div><h3>{v.title}</h3><p>{v.text}</p></div>

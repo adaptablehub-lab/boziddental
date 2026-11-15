@@ -601,3 +601,8 @@ h3 { font-size: 1.2rem; }
 .load-more .btn { padding: 6px 6px 6px 24px; }
 .load-more .btn__arrow { transition: transform .25s; }
 .load-more .btn:hover .btn__arrow { transform: translateY(2px); }
+/* treatment count shown as a pill now that the panel numbers are gone */
+.cat-panel__count { font-size: .82rem; opacity: 1; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.45); background: rgba(0,0,0,.3); backdrop-filter: blur(6px); }
+/* card numbers removed: the Why-us label now sits on the left as a pill */
+.value__top { justify-content: flex-start; }
+.value__kicker { font-size: .82rem; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.25); backdrop-filter: blur(6px); }
