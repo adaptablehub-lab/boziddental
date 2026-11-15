@@ -5,4 +5,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/boziddental/",
   plugins: [react()],
+  // bundle the router into the server build used for pre-rendering
+  ssr: { noExternal: ["react-router-dom", "react-router"] },
 });

@@ -567,3 +567,30 @@ h3 { font-size: 1.2rem; }
 /* lift the hero text a little higher above the slide indicators */
 .hero__nav { margin-top: 96px; }
 @media (max-width: 560px) { .hero__nav { margin-top: 56px; } }
+
+/* Home: accreditations + FAQs in one section */
+.trust-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.trust-faq .h-md { font-size: clamp(1.6rem, 1.25rem + 1.3vw, 2.3rem); margin-bottom: 12px; }
+.trust-faq__lead { margin-bottom: 24px; }
+.trust-faq__col > .h-md + .faq { margin-top: 20px; }
+.trust-faq .accred__card { padding: 20px; }
+@media (max-width: 900px) { .trust-faq { grid-template-columns: 1fr; gap: 56px; } }
+
+/* Services page: card grid */
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.svc-card { display: flex; flex-direction: column; background: #fff; border-radius: var(--r); overflow: hidden; border: 1px solid transparent; transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s, border-color .3s; }
+.svc-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -24px rgba(14,17,61,.4); }
+.svc-card.is-highlight { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(72,194,197,.25); }
+.svc-card__media { position: relative; overflow: hidden; }
+.svc-card__img { aspect-ratio: 16 / 10; transition: transform .6s ease; }
+.svc-card:hover .svc-card__img { transform: scale(1.05); }
+.svc-card__num { position: absolute; top: 14px; left: 14px; font-size: .8rem; font-weight: 600; color: #fff; padding: 4px 11px; border-radius: 999px; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.4); backdrop-filter: blur(6px); }
+.svc-card__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 22px 22px 24px; flex: 1; }
+.svc-card__body h3 { font-size: 1.3rem; }
+.svc-card__body p { color: var(--muted); font-size: .95rem; }
+.svc-card__link { margin-top: auto; padding-top: 6px; font-weight: 600; color: var(--navy); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.svc-card__link span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--teal); color: var(--navy); transition: transform .25s; }
+.svc-card__link:hover span { transform: rotate(-45deg); }
+@media (max-width: 1080px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+.svc-card .svc__cat { display: inline-block !important; }

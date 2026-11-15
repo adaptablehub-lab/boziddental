@@ -17,6 +17,8 @@ export default function BookingForm() {
   const [form, setForm] = useState(empty);
   const [invalid, setInvalid] = useState({});
   const [status, setStatus] = useState(null);
+  const [minDate, setMinDate] = useState(undefined);
+  useEffect(() => setMinDate(today()), []);
 
   // Pre-select the service when arriving from a "Book this treatment" link
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function BookingForm() {
         </select>
       </label>
       <div className="form__row">
-        <label>Preferred date *<input type="date" min={today()} required {...field("date")} /></label>
+        <label>Preferred date *<input type="date" min={minDate} required {...field("date")} /></label>
         <label>Preferred time
           <select {...field("time")}>
             <option value="">Any time</option>

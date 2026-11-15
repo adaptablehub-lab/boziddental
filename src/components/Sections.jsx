@@ -35,18 +35,24 @@ export function ServicesList() {
   const [params] = useSearchParams();
   const fromCat = params.get("cat");
   const fromOpen = params.get("open");
-  const [cat, setCat] = useState(serviceCategories.some((c) => c.id === fromCat) ? fromCat : "all");
-  const [open, setOpen] = useState(services.some((s) => s.slug === fromOpen) ? fromOpen : services[0].slug);
+  // Start from the defaults so the browser matches the pre-rendered HTML, then apply the link's ?cat= / ?open=
+  const [cat, setCat] = useState("all");
+  const [highlight, setHighlight] = useState(null);
+  const list = cat === "all" ? services : services.filter((s) => s.category === cat);
+  const catLabel = (id) => serviceCategories.find((c) => c.id === id)?.label;
 
-  // Arriving from the home page: bring the chosen category or treatment into view
+  // Arriving from the home page: bring the chosen category or treatment into view, briefly highlighted
+  useEffect(() => {
+    if (serviceCategories.some((c) => c.id === fromCat)) setCat(fromCat);
+    if (services.some((s) => s.slug === fromOpen)) setHighlight(fromOpen);
+  }, [fromCat, fromOpen]);
   useEffect(() => {
     if (!fromCat && !fromOpen) return;
     const el = document.getElementById(fromOpen ? `svc-row-${fromOpen}` : "services");
-    const t = setTimeout(() => el?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" }), 150);
-    return () => clearTimeout(t);
+    const t = setTimeout(() => el?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: fromOpen ? "center" : "start" }), 150);
+    const t2 = setTimeout(() => setHighlight(null), 3500);
+    return () => { clearTimeout(t); clearTimeout(t2); };
   }, [fromCat, fromOpen]);
-  const list = cat === "all" ? services : services.filter((s) => s.category === cat);
-  const catLabel = (id) => serviceCategories.find((c) => c.id === id)?.label;
 
   return (
     <section className="section section--grey" id="services">
@@ -63,28 +69,22 @@ export function ServicesList() {
           ))}
         </div>
 
-        <div className="svc-list">
+        <div className="svc-grid">
           {list.map((s) => {
-            const isOpen = open === s.slug;
             const n = services.indexOf(s) + 1;
             return (
-              <div key={s.slug} id={`svc-row-${s.slug}`} className={isOpen ? "svc is-open" : "svc"}>
-                <button type="button" className="svc__head" aria-expanded={isOpen} aria-controls={`svc-${s.slug}`} onClick={() => setOpen(isOpen ? null : s.slug)}>
-                  <span className="svc__num">({String(n).padStart(2, "0")})</span>
-                  <h3>{s.title}</h3>
+              <article key={s.slug} id={`svc-row-${s.slug}`} className={highlight === s.slug ? "svc-card is-highlight" : "svc-card"}>
+                <div className="svc-card__media">
+                  <Photo name={`service-${s.slug}.jpg`} className="svc-card__img" />
+                  <span className="svc-card__num">{String(n).padStart(2, "0")}</span>
+                </div>
+                <div className="svc-card__body">
                   <span className="svc__cat">{catLabel(s.category)}</span>
-                  <span className="plus" aria-hidden="true" />
-                </button>
-                {isOpen && (
-                  <div className="svc__body" id={`svc-${s.slug}`}>
-                    <Photo name={`service-${s.slug}.jpg`} className="svc__img" />
-                    <div className="svc__text">
-                      <p>{s.text}</p>
-                      <Button to={bookLink(s.title)}>Book this treatment</Button>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  <h3>{s.title}</h3>
+                  <p>{s.text}</p>
+                  <Link to={bookLink(s.title)} className="svc-card__link">Book this treatment <span aria-hidden="true">→</span></Link>
+                </div>
+              </article>
             );
           })}
         </div>
@@ -253,6 +253,28 @@ export function WhyUs() {
 }
 
 /* ---------- Accreditations ---------- */
+function AccredList() {
+  return (
+    <ul className="accred__list">
+      {accreditations.map((a) => (
+        <li className="accred__card" key={a.short}>
+          <span className="accred__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 3 5 6v5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6z" /><path d="m9 12 2.2 2.2L15.5 10" />
+            </svg>
+          </span>
+          <div>
+            <span className="accred__scope">{a.scope}</span>
+            <h3>{a.body}</h3>
+            <p>{a.text}</p>
+            <span className="accred__ref">{a.ref}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function Accreditations({ grey = false }) {
   return (
     <section className={grey ? "section section--grey" : "section"} id="accreditations">
@@ -262,23 +284,7 @@ export function Accreditations({ grey = false }) {
           <h2 className="h-lg">Registered with Nigeria's dental and Oyo State health regulators</h2>
           <p className="muted">Your care is in qualified hands. Our dentists and our clinic meet the standards set by national and state regulators.</p>
         </div>
-        <ul className="accred__list">
-          {accreditations.map((a) => (
-            <li className="accred__card" key={a.short}>
-              <span className="accred__badge" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3 5 6v5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6z" /><path d="m9 12 2.2 2.2L15.5 10" />
-                </svg>
-              </span>
-              <div>
-                <span className="accred__scope">{a.scope}</span>
-                <h3>{a.body}</h3>
-                <p>{a.text}</p>
-                <span className="accred__ref">{a.ref}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <AccredList />
       </div>
     </section>
   );
@@ -450,8 +456,26 @@ export function TeamGrid() {
 }
 
 /* ---------- FAQ ---------- */
-export function FaqList({ items = faqs, title = "Common questions", withIntro = true }) {
+function FaqAccordion({ items }) {
   const [open, setOpen] = useState(-1);
+  return (
+    <div className="faq">
+      {items.map((f, i) => {
+        const isOpen = open === i;
+        return (
+          <div className={isOpen ? "faq__item is-open" : "faq__item"} key={f.q}>
+            <button type="button" className="faq__q" aria-expanded={isOpen} aria-controls={`faq-${i}`} onClick={() => setOpen(isOpen ? -1 : i)}>
+              {f.q}<span className="plus" aria-hidden="true" />
+            </button>
+            <div className="faq__a" id={`faq-${i}`} hidden={!isOpen}><p>{f.a}</p></div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export function FaqList({ items = faqs, title = "Common questions", withIntro = true }) {
   return (
     <section className="section" id="faq">
       <div className={withIntro ? "wrap faq-wrap" : "wrap wrap--narrow"}>
@@ -462,18 +486,28 @@ export function FaqList({ items = faqs, title = "Common questions", withIntro = 
             <Link to="/faqs" className="text-link">See all FAQs →</Link>
           </div>
         )}
-        <div className="faq">
-          {items.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <div className={isOpen ? "faq__item is-open" : "faq__item"} key={f.q}>
-                <button type="button" className="faq__q" aria-expanded={isOpen} aria-controls={`faq-${i}`} onClick={() => setOpen(isOpen ? -1 : i)}>
-                  {f.q}<span className="plus" aria-hidden="true" />
-                </button>
-                <div className="faq__a" id={`faq-${i}`} hidden={!isOpen}><p>{f.a}</p></div>
-              </div>
-            );
-          })}
+        <FaqAccordion items={items} />
+      </div>
+    </section>
+  );
+}
+
+/** Home page: accreditations and FAQs side by side in one section. */
+export function TrustAndFaq({ faqItems = faqs.slice(0, 4) }) {
+  return (
+    <section className="section" id="faq">
+      <div className="wrap trust-faq">
+        <div className="trust-faq__col" id="accreditations">
+          <Tag>Licensed &amp; accredited</Tag>
+          <h2 className="h-md">Registered with Nigeria's dental and Oyo State health regulators</h2>
+          <p className="muted trust-faq__lead">Your care is in qualified hands. Our dentists and our clinic meet national and state standards.</p>
+          <AccredList />
+        </div>
+        <div className="trust-faq__col">
+          <Tag>FAQs</Tag>
+          <h2 className="h-md">Common questions</h2>
+          <FaqAccordion items={faqItems} />
+          <Link to="/faqs" className="text-link">See all FAQs →</Link>
         </div>
       </div>
     </section>

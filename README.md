@@ -49,6 +49,14 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 
 The booking form sends the request through the patient's WhatsApp (to 0808 662 2159) or email app, and the clinic confirms. To receive submissions directly on a server, connect a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 
+## SEO
+- **Pre-rendered pages:** `npm run build` renders every page to real HTML (`src/entry-server.jsx` + `scripts/prerender.mjs`), so search engines and WhatsApp/social link previews see the full content. The app then takes over in the browser.
+- **Per-page titles, descriptions and social tags** live in `src/seo.js` (`pages`). Keep titles under ~60 characters and descriptions under ~160.
+- **Structured data:** every page includes schema.org `Dentist` data (name, address, phones, hours, services); the home and FAQ pages also include `FAQPage` data.
+- **Sitemap & robots:** `sitemap.xml` and `robots.txt` are generated at build time. On GitHub Pages the robots.txt sits under `/boziddental/`, so submit the sitemap directly in Google Search Console: https://adaptablehub-lab.github.io/boziddental/sitemap.xml
+- **Moving to a custom domain:** update `SITE_URL` and `BASE_PATH` in `src/seo.js`, `base` in `vite.config.js`, and the `basename` in `src/App.jsx` / `src/entry-server.jsx`.
+- **Next steps for the clinic:** create a Google Business Profile with the same name, address and phone numbers, and add the site link there.
+
 ## Deploy
 Every push to `main` builds the site and publishes it to GitHub Pages automatically (see `.github/workflows/deploy.yml`).
 Live site: https://adaptablehub-lab.github.io/boziddental/
@@ -62,6 +70,7 @@ Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexel
 | hero-2.jpg | https://www.pexels.com/photo/6502163/ |
 | hero-3.jpg | https://www.pexels.com/photo/6502555/ |
 | hero-4.jpg | Provided by the clinic |
+| hero-5.jpg | https://www.pexels.com/photo/6812453/ |
 | cta.jpg | https://www.pexels.com/photo/287237/ |
 | first-visit.jpg | https://www.pexels.com/photo/5355867/ |
 | service-checkup.jpg | https://www.pexels.com/photo/5355705/ |

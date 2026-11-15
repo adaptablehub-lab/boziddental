@@ -1,21 +1,13 @@
-import { useEffect } from "react";
 import Hero from "../components/Hero.jsx";
 import BookingForm from "../components/Booking.jsx";
 import {
   Accreditations, ContactList, Cta, FaqList, FirstVisit, HoursTable, Intro,
-  ReviewsGrid, ReviewsSlider, ServicesList, ServicesPreview, TeamGrid, VirtualServices, WhyUs,
+  ReviewsGrid, ReviewsSlider, ServicesList, ServicesPreview, TeamGrid, TrustAndFaq, VirtualServices, WhyUs,
 } from "../components/Sections.jsx";
 import { Button, PageHero, Tag, WhatsAppIcon } from "../components/ui.jsx";
-import { clinic, faqs, waLink } from "../data.js";
-
-function useTitle(title) {
-  useEffect(() => {
-    document.title = title ? `${title} | Bozid Dental Clinic, Ibadan` : "Bozid Dental Clinic, Ibadan | Your smile, our priority";
-  }, [title]);
-}
+import { clinic, waLink } from "../data.js";
 
 export function Home() {
-  useTitle();
   return (
     <>
       <Hero />
@@ -24,15 +16,13 @@ export function Home() {
       <VirtualServices />
       <FirstVisit />
       <ReviewsSlider />
-      <Accreditations />
-      <FaqList items={faqs.slice(0, 4)} />
+      <TrustAndFaq />
       <Cta />
     </>
   );
 }
 
 export function About() {
-  useTitle("About us");
   return (
     <>
       <PageHero tag="About us" title="Your smile, our priority">
@@ -62,7 +52,6 @@ export function About() {
 }
 
 export function Services() {
-  useTitle("Services");
   return (
     <>
       <PageHero tag="Our services" title="Dental services">
@@ -76,7 +65,6 @@ export function Services() {
 }
 
 export function Team() {
-  useTitle("Meet the team");
   return (
     <>
       <PageHero tag="Our team" title="Meet the team">
@@ -89,7 +77,6 @@ export function Team() {
 }
 
 export function Reviews() {
-  useTitle("Reviews");
   return (
     <>
       <PageHero tag="Testimonials" title="What our patients say">
@@ -102,7 +89,6 @@ export function Reviews() {
 }
 
 export function Faqs() {
-  useTitle("FAQs");
   return (
     <>
       <PageHero tag="FAQs" title="Frequently asked questions">
@@ -115,7 +101,6 @@ export function Faqs() {
 }
 
 export function Contact() {
-  useTitle("Contact");
   return (
     <>
       <PageHero tag="Contact" title="Get in touch">
@@ -143,7 +128,6 @@ export function Contact() {
 }
 
 export function Book() {
-  useTitle("Book an appointment");
   return (
     <>
       <PageHero tag="Book an appointment" title="Request an appointment">
@@ -169,7 +153,6 @@ export function Book() {
 }
 
 export function NotFound() {
-  useTitle("Page not found");
   return (
     <>
       <PageHero title="Page not found" crumb="Not found">

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { heroSlides, img } from "../data.js";
 import { prefersReducedMotion } from "../hooks/index.js";
 import { Button, Tag, bookLink } from "./ui.jsx";
@@ -9,14 +9,15 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [cycle, setCycle] = useState(0); // bumps to restart the progress bar on manual picks
-  const reduce = useRef(prefersReducedMotion());
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => setReduceMotion(prefersReducedMotion()), []);
 
   // Auto-advance
   useEffect(() => {
-    if (reduce.current || paused) return;
+    if (reduceMotion || paused) return;
     const t = setTimeout(() => setCurrent((c) => (c + 1) % heroSlides.length), DELAY);
     return () => clearTimeout(t);
-  }, [current, paused, cycle]);
+  }, [current, paused, cycle, reduceMotion]);
 
   // Pause while the tab is hidden
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Hero() {
   }, []);
 
   const go = (i) => { setCurrent(i); setCycle((c) => c + 1); };
-  const isPaused = paused || reduce.current;
+  const isPaused = paused || reduceMotion;
 
   return (
     <section

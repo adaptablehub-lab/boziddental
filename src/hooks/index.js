@@ -5,7 +5,7 @@ export const prefersReducedMotion = () =>
 
 /** Current vertical scroll position (updates on scroll and resize). */
 export function useScrollY() {
-  const [y, setY] = useState(() => (typeof window !== "undefined" ? window.scrollY : 0));
+  const [y, setY] = useState(0); // real value is read after mount (keeps pre-rendered HTML in sync)
   useEffect(() => {
     const on = () => setY(window.scrollY);
     on();

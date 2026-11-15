@@ -97,6 +97,16 @@ export const heroSlides = [
     cta: "Book a smile consultation",
     service: "Teeth whitening",
   },
+  {
+    image: "hero-5.jpg",
+    alt: "Modern dental treatment room with advanced equipment",
+    position: "40% center",
+    nav: "World-class facility",
+    tag: "Modern facility",
+    title: "World-class facility, modern equipment.",
+    text: "A spotless, comfortable clinic with modern dental equipment and on-site X-rays, for accurate and efficient care.",
+    cta: "Book a visit",
+  },
 ];
 
 export const aboutPoints = [

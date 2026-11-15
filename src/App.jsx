@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { applyHead } from "./head.js";
 import Header from "./components/Header.jsx";
 import { Footer, WhatsAppFab } from "./components/Footer.jsx";
 import { useReveal, useScrollY } from "./hooks/index.js";
@@ -10,8 +11,11 @@ function Layout() {
   const scrollY = useScrollY();
   const viewport = typeof window !== "undefined" ? window.innerHeight : 800;
 
-  // Start each page at the top
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  // Start each page at the top, and update the title/description/social tags
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    applyHead(pathname.length > 1 ? pathname.replace(/\/$/, "") : "/");
+  }, [pathname]);
 
   // Hide the floating WhatsApp button where it would cover the booking form or footer
   const [overlapping, setOverlapping] = useState(false);
@@ -26,7 +30,7 @@ function Layout() {
     return () => { io.disconnect(); setOverlapping(false); };
   }, [pathname]);
 
-  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-panels, .virtual__intro, .vcard, .accred__card, .faq-wrap > *, .cta", pathname + search);
+  useReveal(".section-head, .about > *, .svc-card, .value, .split > *, .review, .member, .cat-panels, .virtual__intro, .vcard, .accred__card, .faq-wrap > *, .cta", pathname + search);
 
   const isHome = pathname === "/";
   return (
@@ -40,22 +44,29 @@ function Layout() {
   );
 }
 
+/** All routes; used by the browser app and by the build-time pre-renderer. */
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<P.Home />} />
+        <Route path="about" element={<P.About />} />
+        <Route path="services" element={<P.Services />} />
+        <Route path="team" element={<P.Team />} />
+        <Route path="reviews" element={<P.Reviews />} />
+        <Route path="faqs" element={<P.Faqs />} />
+        <Route path="contact" element={<P.Contact />} />
+        <Route path="book" element={<P.Book />} />
+        <Route path="*" element={<P.NotFound />} />
+      </Route>
+    </Routes>
+  );
+}
+
 export default function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<P.Home />} />
-          <Route path="about" element={<P.About />} />
-          <Route path="services" element={<P.Services />} />
-          <Route path="team" element={<P.Team />} />
-          <Route path="reviews" element={<P.Reviews />} />
-          <Route path="faqs" element={<P.Faqs />} />
-          <Route path="contact" element={<P.Contact />} />
-          <Route path="book" element={<P.Book />} />
-          <Route path="*" element={<P.NotFound />} />
-        </Route>
-      </Routes>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
