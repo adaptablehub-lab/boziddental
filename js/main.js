@@ -7,7 +7,12 @@
 
   // Header: transparent over hero, solid after scrolling
   const header = document.querySelector(".header");
-  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
+  const waFab = document.querySelector(".wa-fab");
+  const onScroll = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 60);
+    // show the WhatsApp button once the visitor scrolls past most of the hero
+    if (waFab) waFab.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.6);
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 

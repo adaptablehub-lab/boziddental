@@ -282,8 +282,9 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
   .hero__side { justify-self: start; }
   /* keep each slide's subject in view on narrow screens */
   .hero__slide:nth-child(1) { background-position: 80% center; }
-  .hero__slide:nth-child(2) { background-position: 35% center; }
-  .hero__slide:nth-child(3) { background-position: 62% center; }
+  .hero__slide:nth-child(2) { background-position: 22% center; }
+  .hero__slide:nth-child(3) { background-position: 50% center; }
+  .hero__slide:nth-child(4) { background-position: 45% center; }
   .section-head { flex-direction: column; align-items: flex-start; }
   .split__img { aspect-ratio: 4 / 3; }
   .footer__top { grid-template-columns: 1fr 1fr; }
@@ -302,4 +303,14 @@ details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
   .hero__nav { margin-top: 24px; }
   .partners ul { gap: 20px 28px; }
   .footer__top { grid-template-columns: 1fr; }
+}
+
+/* Floating WhatsApp button */
+.wa-fab { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px 12px 14px; border-radius: 999px; background: #25d366; color: #fff; font-weight: 600; font-size: .95rem; text-decoration: none; box-shadow: 0 12px 28px -10px rgba(0,0,0,.35); transition: transform .3s, box-shadow .2s, opacity .3s, visibility 0s linear .3s; opacity: 0; visibility: hidden; transform: translateY(12px); }
+.wa-fab.is-visible { opacity: 1; visibility: visible; transform: none; transition: transform .3s, box-shadow .2s, opacity .3s; }
+.wa-fab.is-visible:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -10px rgba(0,0,0,.4); }
+.wa-fab svg { width: 24px; height: 24px; }
+@media (max-width: 560px) {
+  .wa-fab { right: 16px; bottom: 16px; padding: 14px; }
+  .wa-fab span { display: none; }
 }
