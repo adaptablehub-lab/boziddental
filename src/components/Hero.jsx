@@ -90,8 +90,6 @@ export default function Hero() {
             aria-current={i === current ? "true" : undefined}
             onClick={() => go(i)}
           >
-            <span className="hero__num">0{i + 1}</span>
-            <span className="hero__label">{s.nav}</span>
             {/* key forces the progress animation to restart */}
             <span className="hero__progress"><i key={i === current ? `${current}-${cycle}` : "idle"} /></span>
           </button>

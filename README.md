@@ -80,5 +80,6 @@ Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexel
 | value-2.jpg | https://www.pexels.com/photo/3845680/ |
 | value-3.jpg | https://www.pexels.com/photo/3881145/ |
 | value-4.jpg | https://www.pexels.com/photo/16903232/ |
+| value-5.jpg | https://www.pexels.com/photo/5915255/ |
 
 Team photos (`team-1…4.jpg`) are intentionally left as placeholders: use real photos of your own staff.

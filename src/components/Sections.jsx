@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   aboutPoints, brand, clinic, faqs, reviews, serviceCategories, services, steps, team, waLink, whyUs,
 } from "../data.js";
@@ -32,8 +32,19 @@ export function Intro({ more = true }) {
 
 /* ---------- Services ---------- */
 export function ServicesList() {
-  const [cat, setCat] = useState("all");
-  const [open, setOpen] = useState(services[0].slug);
+  const [params] = useSearchParams();
+  const fromCat = params.get("cat");
+  const fromOpen = params.get("open");
+  const [cat, setCat] = useState(serviceCategories.some((c) => c.id === fromCat) ? fromCat : "all");
+  const [open, setOpen] = useState(services.some((s) => s.slug === fromOpen) ? fromOpen : services[0].slug);
+
+  // Arriving from the home page: bring the chosen category or treatment into view
+  useEffect(() => {
+    if (!fromCat && !fromOpen) return;
+    const el = document.getElementById(fromOpen ? `svc-row-${fromOpen}` : "services");
+    const t = setTimeout(() => el?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" }), 150);
+    return () => clearTimeout(t);
+  }, [fromCat, fromOpen]);
   const list = cat === "all" ? services : services.filter((s) => s.category === cat);
   const catLabel = (id) => serviceCategories.find((c) => c.id === id)?.label;
 
@@ -57,7 +68,7 @@ export function ServicesList() {
             const isOpen = open === s.slug;
             const n = services.indexOf(s) + 1;
             return (
-              <div key={s.slug} className={isOpen ? "svc is-open" : "svc"}>
+              <div key={s.slug} id={`svc-row-${s.slug}`} className={isOpen ? "svc is-open" : "svc"}>
                 <button type="button" className="svc__head" aria-expanded={isOpen} aria-controls={`svc-${s.slug}`} onClick={() => setOpen(isOpen ? null : s.slug)}>
                   <span className="svc__num">({String(n).padStart(2, "0")})</span>
                   <h3>{s.title}</h3>
@@ -82,25 +93,54 @@ export function ServicesList() {
   );
 }
 
-/** Home page: the three categories as cards linking to the services page. */
+/** Home page: interactive expanding panels, one per service category. */
 export function ServicesPreview() {
+  const [active, setActive] = useState(0);
+  // Hover expands a panel on devices with a mouse; touch and keyboard use the panel's button
+  const canHover = typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
   return (
     <section className="section section--grey">
       <div className="wrap">
-        <SectionHead tag="Our services" title="Complete dental care under one roof" aside={<Button to="/services">All 14 services</Button>} />
-        <div className="cat-cards">
-          {serviceCategories.map((c) => {
+        <SectionHead tag="Our services" title="Complete dental care under one roof" aside={<Button to="/services">All {services.length} services</Button>} />
+        <div className="cat-panels">
+          {serviceCategories.map((c, i) => {
             const items = services.filter((s) => s.category === c.id);
+            const isActive = active === i;
             return (
-              <Link to="/services" className="cat-card" key={c.id}>
-                <Photo name={`service-${items[0].slug}.jpg`} className="cat-card__img" />
-                <div className="cat-card__body">
+              <div
+                key={c.id}
+                className={isActive ? "cat-panel is-active" : "cat-panel"}
+                onMouseEnter={canHover ? () => setActive(i) : undefined}
+              >
+                <Photo name={c.image} className="cat-panel__bg" />
+                <button
+                  type="button"
+                  className="cat-panel__head"
+                  aria-expanded={isActive}
+                  aria-controls={`cat-${c.id}`}
+                  onClick={() => setActive(i)}
+                >
+                  <span className="cat-panel__meta">
+                    <span className="cat-panel__num">0{i + 1}</span>
+                    <span className="cat-panel__count">{items.length} treatments</span>
+                  </span>
                   <h3>{c.label}</h3>
+                  <span className="cat-panel__plus" aria-hidden="true" />
+                </button>
+                <div className="cat-panel__body" id={`cat-${c.id}`} aria-hidden={!isActive} inert={isActive ? undefined : ""}>
+                  <p className="cat-panel__title" aria-hidden="true">{c.label}</p>
                   <p>{c.blurb}</p>
-                  <ul>{items.map((s) => <li key={s.slug}>{s.title}</li>)}</ul>
-                  <span className="cat-card__more">Explore <span aria-hidden="true">→</span></span>
+                  <ul className="cat-panel__list">
+                    {items.map((s) => (
+                      <li key={s.slug}>
+                        <Link to={`/services?open=${s.slug}`}>{s.title}<span aria-hidden="true">↗</span></Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button light to={`/services?cat=${c.id}`}>Explore {c.label.split(" ")[0].toLowerCase()} care</Button>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -109,39 +149,45 @@ export function ServicesPreview() {
   );
 }
 
-/* ---------- Why us ---------- */
+/* ---------- Why us: continuous sliding cards ---------- */
+function ValueCard({ v, n }) {
+  return (
+    <Photo name={v.image} className="value">
+      <div className="value__top">
+        <span className="value__num">0{n}</span>
+        <span className="value__kicker">{v.kicker}</span>
+      </div>
+      <div><h3>{v.title}</h3><p>{v.text}</p></div>
+    </Photo>
+  );
+}
+
 export function WhyUs() {
-  const ref = useRef(null);
-  const scroll = (dir) => {
-    const el = ref.current;
-    const card = el?.querySelector(".value");
-    const step = card ? card.getBoundingClientRect().width + 16 : 400;
-    el?.scrollBy({ left: step * dir, behavior: prefersReducedMotion() ? "auto" : "smooth" });
-  };
+  const [paused, setPaused] = useState(false);
   return (
     <section className="section" id="why">
       <div className="wrap">
-        <SectionHead
-          tag="Why choose us"
-          title="Trusted care, with real attention to how you feel"
-          aside={
-            <div className="scroller-nav">
-              <button type="button" onClick={() => scroll(-1)} aria-label="Scroll left">←</button>
-              <button type="button" onClick={() => scroll(1)} aria-label="Scroll right">→</button>
-            </div>
-          }
-        />
+        <SectionHead tag="Why choose us" title="Trusted care, with real attention to how you feel">
+          Five reasons patients across Ibadan choose Bozid Dental. Hover or tap to pause.
+        </SectionHead>
       </div>
-      <div className="values" ref={ref}>
-        {whyUs.map((v, i) => (
-          <Photo key={v.title} name={v.image} className="value">
-            <div className="value__top">
-              <span className="value__num">0{i + 1}</span>
-              <span className="value__kicker">{v.kicker}</span>
-            </div>
-            <div><h3>{v.title}</h3><p>{v.text}</p></div>
-          </Photo>
-        ))}
+      <div
+        className={paused ? "marquee is-paused" : "marquee"}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onTouchStart={() => setPaused((p) => !p)}
+      >
+        {/* the list is rendered twice so the loop is seamless; the copy is hidden from screen readers */}
+        <div className="marquee__track" style={{ "--count": whyUs.length }}>
+          <div className="marquee__group">
+            {whyUs.map((v, i) => <ValueCard key={v.title} v={v} n={i + 1} />)}
+          </div>
+          <div className="marquee__group" aria-hidden="true">
+            {whyUs.map((v, i) => <ValueCard key={v.title} v={v} n={i + 1} />)}
+          </div>
+        </div>
       </div>
     </section>
   );

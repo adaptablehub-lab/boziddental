@@ -106,9 +106,9 @@ export const aboutPoints = [
 ];
 
 export const serviceCategories = [
-  { id: "preventive", label: "Preventive", blurb: "Keep teeth and gums healthy and catch problems early." },
-  { id: "restorative", label: "Restorative", blurb: "Repair, strengthen or replace damaged and missing teeth." },
-  { id: "cosmetic", label: "Cosmetic & orthodontic", blurb: "Brighten, reshape and straighten your smile." },
+  { id: "preventive", label: "Preventive", image: "service-checkup.jpg", blurb: "Keep teeth and gums healthy and catch problems early." },
+  { id: "restorative", label: "Restorative", image: "service-extraction.jpg", blurb: "Repair, strengthen or replace damaged and missing teeth." },
+  { id: "cosmetic", label: "Cosmetic & orthodontic", image: "service-veneers.jpg", blurb: "Brighten, reshape and straighten your smile." },
 ];
 
 export const services = [
@@ -136,6 +136,7 @@ export const whyUs = [
   { image: "value-2.jpg", kicker: "Accurate from day one", title: "On-site X-rays", text: "Dental radiography in the clinic for accurate diagnosis and clear treatment plans." },
   { image: "value-3.jpg", kicker: "Calm, not clinical", title: "Comfortable environment", text: "A friendly, relaxed space and a gentle approach, especially for nervous patients." },
   { image: "value-4.jpg", kicker: "Accessible to all", title: "Quality, affordable care", text: "Our goal is to make quality dental care accessible to every patient." },
+  { image: "value-5.jpg", kicker: "Book in minutes", title: "Easy WhatsApp booking", text: "Request an appointment online or on WhatsApp, and our team confirms it with you directly." },
 ];
 
 export const steps = [

@@ -19,7 +19,6 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Intro />
       <ServicesPreview />
       <WhyUs />
       <FirstVisit />

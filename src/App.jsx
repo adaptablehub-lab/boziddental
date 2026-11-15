@@ -26,7 +26,7 @@ function Layout() {
     return () => { io.disconnect(); setOverlapping(false); };
   }, [pathname]);
 
-  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-card, .faq-wrap > *, .cta", pathname + search);
+  useReveal(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .cat-panels, .faq-wrap > *, .cta", pathname + search);
 
   const isHome = pathname === "/";
   return (
