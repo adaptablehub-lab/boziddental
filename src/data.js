@@ -2,16 +2,25 @@
 // Replace the placeholders (phone, address, HMOs, team, reviews) with real details.
 
 export const img = (name) => `${import.meta.env.BASE_URL}assets/img/${name}`;
+export const brand = (name) => `${import.meta.env.BASE_URL}assets/brand/${name}`;
 
 export const clinic = {
   name: "Bozid Dental",
   fullName: "Bozid Dental Clinic",
-  tagline: "Gentle, modern dentistry for the whole family.",
-  phoneDisplay: "+234 800 000 0000",
-  phoneHref: "tel:+2348000000000",
-  whatsapp: "https://wa.me/2348000000000?text=" + encodeURIComponent("Hello Bozid Dental, I'd like to book an appointment."),
-  email: "hello@boziddental.com",
-  addressLines: ["12 Smile Avenue", "Your City, Nigeria"],
+  // From the Bozid Dental brand guide (letterhead and call cards)
+  tagline: "Your smile, our priority.",
+  phoneDisplay: "0805 505 4102",
+  phoneHref: "tel:+2348055054102",
+  phones: [
+    { display: "0805 505 4102", href: "tel:+2348055054102" },
+    { display: "0706 970 7130", href: "tel:+2347069707130" },
+    { display: "0808 662 2159", href: "tel:+2348086622159" },
+  ],
+  // Confirm which number is on WhatsApp
+  whatsapp: "https://wa.me/2348055054102?text=" + encodeURIComponent("Hello Bozid Dental, I'd like to book an appointment."),
+  email: "boziddental@gmail.com",
+  addressLines: ["1st Floor, Samsung Building (Liberty House)", "Opposite UI Main Gate, Ibadan"],
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Samsung Building, Liberty House, Opposite UI Main Gate, Ibadan, Nigeria"),
   hoursShort: "Mon–Fri 8:00–18:00 · Sat 9:00–14:00",
   hours: ["Mon–Fri 8:00–18:00", "Sat 9:00–14:00", "Sun closed"],
 };
@@ -125,7 +134,7 @@ export const reviews = [
 
 // Use real photos of your own staff
 export const team = [
-  { image: "team-1.jpg", name: "Dr. [Name] Bozid", role: "Lead dentist · Restorative & implants", badge: "Founder" },
+  { image: "team-1.jpg", name: "Dr. Ibrahim A. Oyediran", role: "Executive Director", badge: "Leadership" },
   { image: "team-2.jpg", name: "Dr. [Name]", role: "Orthodontist · Aligners & braces" },
   { image: "team-3.jpg", name: "Dr. [Name]", role: "Paediatric dentist" },
   { image: "team-4.jpg", name: "[Name]", role: "Dental hygienist" },

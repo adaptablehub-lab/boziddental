@@ -14,6 +14,14 @@ npm run dev        # http://localhost:5173/boziddental/
 npm run build      # production build in dist/
 ```
 
+## Brand
+Follows the *Bozid Dental Brand Guide*:
+- **Colours:** Deep Blue `#0e113d` (primary), Turquoise Green `#48c2c5` (secondary), white and black. Tokens are at the top of `src/styles.css`.
+- **Logo:** `public/assets/brand/logo.png` (full colour) and `logo-white.png` (for dark backgrounds), always used whole with clear space around it.
+- **Smile asset:** `public/assets/brand/smile.png` / `smile-white.png`, used sparingly (CTA banner watermark, favicon).
+- **Shapes:** rounded edges throughout; the deep-blue bar with a turquoise segment (from the letterhead and call cards) tops the booking form and footer.
+- **Type:** Bariol Bold for headings and Helvetica Neue for body text. Bariol isn't a free web font, so **Nunito** stands in for it until a Bariol web-font licence is added (add an `@font-face` for "Bariol" and it takes over automatically).
+
 ## Where things live
 - `src/data.js`: **all text and contact details** (phone, WhatsApp, address, hours, services, FAQs, team, reviews, HMOs). Edit this file to change content.
 - `src/components/`: one React component per section
@@ -30,15 +38,13 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 - `team-1…4.jpg`: team portraits (portrait)
 - `cta.jpg`: wide photo for the bottom banner
 
-## Things to customise
-Replace these placeholders in `src/data.js`:
-- Phone and WhatsApp number `+234 800 000 0000` / `tel:+2348000000000` / `wa.me/2348000000000`
-- Email `hello@boziddental.com`
-- Address `12 Smile Avenue, Your City, Nigeria`
-- Team names `[Name]`
-- Sample reviews (use real testimonials, with patient permission)
+## Things to confirm or customise (in `src/data.js`)
+Contact details come from the brand guide's letterhead: address (1st Floor, Samsung Building (Liberty House), Opposite UI Main Gate, Ibadan), email boziddental@gmail.com and phones 0805 505 4102, 0706 970 7130, 0808 662 2159.
+- **WhatsApp number:** currently 0805 505 4102. Change `whatsapp` if a different line is on WhatsApp
 - Opening hours
 - HMO partner names (`HMO partner` ×5): list only HMOs you actually work with
+- Team names and photos (`[Name]` placeholders)
+- Sample reviews (use real testimonials, with patient permission)
 
 The booking form currently opens the visitor's email client. To receive submissions directly, connect it to a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 

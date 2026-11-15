@@ -18,7 +18,7 @@ export default function Header({ scrolled }) {
   return (
     <header className={cls} id="top">
       <div className="wrap header__inner">
-        <Logo />
+        <Logo white={!scrolled} />
         <nav aria-label="Main">
           <ul className={open ? "nav is-open" : "nav"} id="nav-menu">
             {nav.map((item) => (

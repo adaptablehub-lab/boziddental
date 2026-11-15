@@ -53,10 +53,10 @@ export default function Booking({ service, setService }) {
           <h2 className="h-lg">Ready for a healthier smile?</h2>
           <p className="muted">Send your preferred date and we'll confirm within one business day. In pain? Call or WhatsApp us directly.</p>
           <ul className="contact">
-            <li><small>Phone</small><a href={clinic.phoneHref}>{clinic.phoneDisplay}</a></li>
+            <li><small>Phone</small><span className="contact__phones">{clinic.phones.map((ph) => <a key={ph.href} href={ph.href}>{ph.display}</a>)}</span></li>
             <li><small>WhatsApp</small><a href={clinic.whatsapp} target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp</a></li>
             <li><small>Email</small><a href={`mailto:${clinic.email}`}>{clinic.email}</a></li>
-            <li><small>Address</small><span>{clinic.addressLines.join(", ")}</span></li>
+            <li><small>Address</small><span>{clinic.addressLines.join(", ")} · <a href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">Directions</a></span></li>
             <li><small>Hours</small><span>{clinic.hoursShort}</span></li>
           </ul>
         </div>

@@ -6,12 +6,13 @@ export function Footer() {
     <footer className="footer">
       <div className="wrap footer__top">
         <div>
-          <Logo />
-          <p>{clinic.tagline}</p>
+          <Logo white />
+          <p className="footer__tagline">{clinic.tagline}</p>
         </div>
         <div>
           <h4>Visit</h4>
           <p>{clinic.addressLines.map((l, i) => <span key={i}>{l}<br /></span>)}</p>
+          <p><a href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">Get directions →</a></p>
         </div>
         <div>
           <h4>Hours</h4>
@@ -20,7 +21,7 @@ export function Footer() {
         <div>
           <h4>Contact</h4>
           <p>
-            <a href={clinic.phoneHref}>{clinic.phoneDisplay}</a><br />
+            {clinic.phones.map((ph) => <span key={ph.href}><a href={ph.href}>{ph.display}</a><br /></span>)}
             <a href={clinic.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a><br />
             <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
           </p>

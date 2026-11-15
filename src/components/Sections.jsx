@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  aboutPoints, clinic, extraServices, faqs, hmos, reviews, services, steps, team, whyUs,
+  aboutPoints, brand, clinic, extraServices, faqs, hmos, reviews, services, steps, team, whyUs,
 } from "../data.js";
 import { prefersReducedMotion } from "../hooks/index.js";
 import { Button, Photo, SectionHead, Tag } from "./ui.jsx";
@@ -258,6 +258,7 @@ export function Cta() {
     <section className="cta-section">
       <div className="wrap">
         <Photo name="cta.jpg" className="cta">
+          <img className="cta__smile" src={brand("smile-white.png")} alt="" aria-hidden="true" />
           <h2>Your healthiest smile starts with one visit.</h2>
           <p>Gentle, modern dentistry for the whole family, right here in your community.</p>
           <Button light>Book a visit</Button>

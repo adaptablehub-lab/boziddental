@@ -1,4 +1,4 @@
-import { img } from "../data.js";
+import { brand, img } from "../data.js";
 
 export function Button({ href = "#book", light, block, children, onClick, ...rest }) {
   const cls = ["btn", light && "btn--light", block && "btn--block"].filter(Boolean).join(" ");
@@ -43,13 +43,11 @@ export function Photo({ name, className = "", label, style, children }) {
   );
 }
 
-export function Logo() {
+/** Official Bozid Dental logo (brand guide). `white` for dark backgrounds. */
+export function Logo({ white = false }) {
   return (
     <a href="#top" className="logo" aria-label="Bozid Dental home">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M16 5c-3-2.5-7.5-2.7-10 0-2.6 2.8-1.8 7.3-.6 10.6 1 2.7 1.3 5.5 1.8 8.4.4 2.4 1.3 4 2.8 4 1.8 0 2.2-2.3 2.6-4.4.4-2.3.9-4.6 3.4-4.6s3 2.3 3.4 4.6c.4 2.1.8 4.4 2.6 4.4 1.5 0 2.4-1.6 2.8-4 .5-2.9.8-5.7 1.8-8.4 1.2-3.3 2-7.8-.6-10.6-2.5-2.7-7-2.5-10 0z" fill="currentColor" />
-      </svg>
-      Bozid Dental
+      <img src={brand(white ? "logo-white.png" : "logo.png")} alt="Bozid Dental" width="473" height="240" />
     </a>
   );
 }
