@@ -25,6 +25,7 @@
         <ul class="nav" id="nav-menu">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why us</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -49,11 +50,7 @@
           <a href="#book" class="btn btn--light">Book an appointment<span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div class="wrap hero__bar">
-        <div><strong>15+</strong><span>Years caring for smiles</span></div>
-        <div><strong>4.9★</strong><span>Average patient rating</span></div>
-        <div><strong>Same day</strong><span>Emergency appointments</span></div>
-      </div>
+     
     </section>
 
     <!-- ============ About ============ -->
@@ -65,9 +62,9 @@
           <a href="#book" class="btn">Meet us in person<span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
         <ul class="about__list">
-          <li><span>01</span><div><h3>Clear, upfront pricing</h3><p>Every option and its cost explained before any treatment begins.</p></div></li>
-          <li><span>02</span><div><h3>Comfort first</h3><p>Gentle techniques and sedation options for nervous patients.</p></div></li>
-          <li><span>03</span><div><h3>Modern technology</h3><p>Low-radiation digital X-rays and intraoral cameras.</p></div></li>
+          <li><span>01</span><div><h3>Care for all ages</h3><p>From a child's first visit to implants for grandparents, the whole family in one place.</p></div></li>
+          <li><span>02</span><div><h3>Same-day emergencies</h3><p>We keep time free every day for toothache, swelling and broken teeth.</p></div></li>
+          <li><span>03</span><div><h3>Flexible payment</h3><p>Clear estimates up front and monthly plans for larger treatments.</p></div></li>
         </ul>
       </div>
     </section>
@@ -78,57 +75,122 @@
         <div class="section-head">
           <div>
             <span class="tag">Our services</span>
-            <h2 class="h-lg">Complete dental care under one roof</h2>
+            <h2 class="h-lg">Modern treatments for every kind of smile</h2>
           </div>
-          <p>Preventive, restorative and cosmetic treatments for every age, all in one place.</p>
+          <p>From a routine clean to a full smile makeover, everything is planned around your comfort and your goals.</p>
         </div>
-        <div class="services">
-          <article class="service">
-            <div class="service__img photo" style="background-image:url('assets/img/service-checkup.jpg'),var(--ph)"></div>
-            <details>
-              <summary><h3>Check-ups &amp; cleaning</h3><span class="plus" aria-hidden="true"></span></summary>
-              <p>Thorough exams, digital X-rays and professional cleaning to catch problems early and keep gums healthy.</p>
-            </details>
-          </article>
-          <article class="service">
-            <div class="service__img photo" style="background-image:url('assets/img/service-whitening.jpg'),var(--ph)"></div>
-            <details>
-              <summary><h3>Teeth whitening</h3><span class="plus" aria-hidden="true"></span></summary>
-              <p>Safe in-chair and take-home whitening for a noticeably brighter smile, often in a single visit.</p>
-            </details>
-          </article>
-          <article class="service">
-            <div class="service__img photo" style="background-image:url('assets/img/service-implants.jpg'),var(--ph)"></div>
-            <details>
-              <summary><h3>Dental implants</h3><span class="plus" aria-hidden="true"></span></summary>
-              <p>Permanent, natural-looking replacements for missing teeth that restore full chewing confidence.</p>
-            </details>
-          </article>
-          <article class="service">
-            <div class="service__img photo" style="background-image:url('assets/img/service-ortho.jpg'),var(--ph)"></div>
-            <details>
-              <summary><h3>Orthodontics</h3><span class="plus" aria-hidden="true"></span></summary>
-              <p>Clear aligners and modern braces for straighter teeth and a healthier bite, for teens and adults.</p>
-            </details>
-          </article>
+        <div class="svc-list">
+          <details class="svc" name="services" open>
+            <summary><span class="svc__num">(01)</span><h3>Check-ups &amp; hygiene</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-hygiene.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Thorough exams, low-dose digital X-rays and a professional clean that keeps gums healthy and stops small problems from growing.</p>
+                <a href="#book" class="btn" data-service="Check-up & hygiene">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(02)</span><h3>Aesthetic dentistry</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-aesthetic.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Subtle reshaping, bonding and contouring that brings balance to your smile while keeping it looking natural.</p>
+                <a href="#book" class="btn" data-service="Aesthetic dentistry">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(03)</span><h3>Veneers</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-veneers.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Thin, custom porcelain shells that fix chips, gaps, uneven shape or stubborn discolouration on the front teeth.</p>
+                <a href="#book" class="btn" data-service="Veneers">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(04)</span><h3>Teeth whitening</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-whitening.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Safe in-chair or take-home whitening that lifts your shade noticeably without harming enamel.</p>
+                <a href="#book" class="btn" data-service="Teeth whitening">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(05)</span><h3>Dental implants</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-implants.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>A lasting replacement for one, several or all missing teeth that looks, feels and works like the real thing.</p>
+                <a href="#book" class="btn" data-service="Dental implants">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(06)</span><h3>Clear aligners</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-ortho.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Nearly invisible aligners that straighten teeth and correct your bite, for teens and adults.</p>
+                <a href="#book" class="btn" data-service="Clear aligners">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(07)</span><h3>Braces</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-braces.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Modern metal or tooth-coloured braces for predictable, steady results on more complex cases.</p>
+                <a href="#book" class="btn" data-service="Braces">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(08)</span><h3>Wisdom tooth removal</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-extraction.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Calm, carefully numbed removal of problem wisdom teeth, with clear aftercare so you heal quickly.</p>
+                <a href="#book" class="btn" data-service="Wisdom tooth removal">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
+          <details class="svc" name="services">
+            <summary><span class="svc__num">(09)</span><h3>Oral surgery</h3><span class="plus" aria-hidden="true"></span></summary>
+            <div class="svc__body">
+              <div class="svc__img photo" style="background-image:url('assets/img/service-surgery.jpg'),var(--ph)"></div>
+              <div class="svc__text">
+                <p>Gentle surgical care, from difficult extractions to bone grafting, so your mouth is ready for lasting treatment.</p>
+                <a href="#book" class="btn" data-service="Oral surgery">Book this treatment<span class="btn__arrow" aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </details>
         </div>
-        <ul class="service-chips">
-          <li>Root canal &amp; fillings</li>
-          <li>Crowns &amp; veneers</li>
-          <li>Kids' dentistry</li>
-          <li>Gum care</li>
-          <li class="chip--alert"><a href="tel:+10000000000">Emergency care · call now</a></li>
-        </ul>
+        <div class="also">
+          <p>Also available</p>
+          <ul class="service-chips">
+            <li>Root canal &amp; fillings</li>
+            <li>Crowns &amp; bridges</li>
+            <li>Kids' dentistry</li>
+            <li>Gum care</li>
+            <li class="chip--alert"><a href="tel:+10000000000">Emergency care · call now</a></li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- ============ Values (numbered cards) ============ -->
-    <section class="section">
+    <!-- ============ Why us ============ -->
+    <section class="section" id="why">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <span class="tag">Our promise</span>
-            <h2 class="h-lg">What you can expect at every visit</h2>
+            <span class="tag">Why choose us</span>
+            <h2 class="h-lg">Expert care, with real attention to how you feel</h2>
           </div>
           <div class="scroller-nav">
             <button type="button" data-scroll="-1" aria-label="Scroll left">←</button>
@@ -138,20 +200,20 @@
       </div>
       <div class="values" data-scroller>
         <article class="value photo" style="background-image:url('assets/img/value-1.jpg'),var(--ph)">
-          <span class="value__num">01</span>
-          <div><h3>We listen first</h3><p>Your concerns and goals shape every treatment plan we suggest.</p></div>
+          <div class="value__top"><span class="value__num">01</span><span class="value__kicker">Skill you can trust</span></div>
+          <div><h3>Experienced clinicians</h3><p>A team with years of hands-on experience who keep training in the latest techniques.</p></div>
         </article>
         <article class="value photo" style="background-image:url('assets/img/value-2.jpg'),var(--ph)">
-          <span class="value__num">02</span>
-          <div><h3>No surprises</h3><p>Transparent estimates and flexible payment plans before we start.</p></div>
+          <div class="value__top"><span class="value__num">02</span><span class="value__kicker">Precise from day one</span></div>
+          <div><h3>Modern technology</h3><p>Digital scans and imaging for accurate diagnosis and fewer, shorter appointments.</p></div>
         </article>
         <article class="value photo" style="background-image:url('assets/img/value-3.jpg'),var(--ph)">
-          <span class="value__num">03</span>
-          <div><h3>Pain-free focus</h3><p>Gentle techniques and modern anaesthetics for a comfortable visit.</p></div>
+          <div class="value__top"><span class="value__num">03</span><span class="value__kicker">Calm, not clinical</span></div>
+          <div><h3>Comfort-focused care</h3><p>Gentle numbing, sedation options and a relaxed pace, especially for nervous patients.</p></div>
         </article>
         <article class="value photo" style="background-image:url('assets/img/value-4.jpg'),var(--ph)">
-          <span class="value__num">04</span>
-          <div><h3>Spotless standards</h3><p>Hospital-grade sterilisation and infection control at every step.</p></div>
+          <div class="value__top"><span class="value__num">04</span><span class="value__kicker">Built around you</span></div>
+          <div><h3>Patient-centred plans</h3><p>We listen first, explain every option and cost, and never push treatment you don't need.</p></div>
         </article>
       </div>
     </section>
@@ -200,14 +262,17 @@
         <div class="reviews" data-slider>
           <div class="reviews__track">
             <blockquote class="review">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
               <p>“I used to dread the dentist. The team explained everything and I didn't feel a thing. I actually look forward to check-ups now.”</p>
               <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Cleaning &amp; fillings</small></div></footer>
             </blockquote>
             <blockquote class="review">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
               <p>“My implant looks and feels completely natural. Everything was on time and exactly the price I was quoted.”</p>
               <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Dental implant</small></div></footer>
             </blockquote>
             <blockquote class="review">
+              <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
               <p>“Our kids love coming here. The staff are patient, fun and genuinely kind. Highly recommended for families.”</p>
               <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Family patient</small></div></footer>
             </blockquote>
@@ -260,14 +325,19 @@
             <label>Service
               <select name="service" required>
                 <option value="">Choose a service</option>
-                <option>Check-up &amp; cleaning</option>
+                <option>Check-up &amp; hygiene</option>
+                <option>Aesthetic dentistry</option>
+                <option>Veneers</option>
                 <option>Teeth whitening</option>
                 <option>Dental implants</option>
-                <option>Orthodontics</option>
+                <option>Clear aligners</option>
+                <option>Braces</option>
+                <option>Wisdom tooth removal</option>
+                <option>Oral surgery</option>
                 <option>Root canal / filling</option>
-                <option>Crowns &amp; veneers</option>
                 <option>Kids' dentistry</option>
                 <option>Emergency</option>
+                <option>Not sure yet</option>
               </select>
             </label>
             <label>Preferred date<input name="date" type="date" required /></label>

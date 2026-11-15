@@ -24,7 +24,7 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
   // Reveal on scroll
-  const revealEls = document.querySelectorAll(".section-head, .about > *, .service, .value, .split > *, .review, .member, .book > *, .faq-wrap > *, .cta");
+  const revealEls = document.querySelectorAll(".section-head, .about > *, .svc, .value, .split > *, .review, .member, .book > *, .faq-wrap > *, .cta");
   if ("IntersectionObserver" in window && !reduceMotion) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -70,8 +70,21 @@
     window.addEventListener("resize", () => go(index));
   }
 
+  // Services list: keep one item open at a time (fallback for browsers without <details name>)
+  const svcs = document.querySelectorAll(".svc");
+  svcs.forEach((d) => d.addEventListener("toggle", () => {
+    if (d.open) svcs.forEach((o) => { if (o !== d) o.open = false; });
+  }));
+
   // Booking form
   const form = document.getElementById("booking-form");
+  // "Book this treatment" buttons pre-select the service in the form
+  document.querySelectorAll("[data-service]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const select = form && form.querySelector('select[name="service"]');
+      if (select) select.value = btn.dataset.service;
+    });
+  });
   if (form) {
     const status = form.querySelector(".form__status");
     form.querySelector('input[type="date"]').min = new Date().toISOString().split("T")[0];
