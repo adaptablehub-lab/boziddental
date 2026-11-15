@@ -106,7 +106,7 @@ export const aboutPoints = [
 ];
 
 export const serviceCategories = [
-  { id: "preventive", label: "Preventive", image: "service-checkup.jpg", blurb: "Keep teeth and gums healthy and catch problems early." },
+  { id: "preventive", label: "Preventive", image: "cat-preventive.jpg", blurb: "Keep teeth and gums healthy and catch problems early." },
   { id: "restorative", label: "Restorative", image: "service-extraction.jpg", blurb: "Repair, strengthen or replace damaged and missing teeth." },
   { id: "cosmetic", label: "Cosmetic & orthodontic", image: "service-veneers.jpg", blurb: "Brighten, reshape and straighten your smile." },
 ];
@@ -129,7 +129,7 @@ export const services = [
 ];
 
 // Options for the booking form's service dropdown
-export const serviceOptions = [...services.map((s) => s.title), "Not sure yet"];
+export const serviceOptions = [...services.map((s) => s.title), "Virtual consultation", "Not sure yet"];
 
 export const whyUs = [
   { image: "value-1.jpg", kicker: "Care you can trust", title: "Experienced team", text: "Skilled, caring dental professionals focused on getting things right for you." },
@@ -137,6 +137,33 @@ export const whyUs = [
   { image: "value-3.jpg", kicker: "Calm, not clinical", title: "Comfortable environment", text: "A friendly, relaxed space and a gentle approach, especially for nervous patients." },
   { image: "value-4.jpg", kicker: "Accessible to all", title: "Quality, affordable care", text: "Our goal is to make quality dental care accessible to every patient." },
   { image: "value-5.jpg", kicker: "Book in minutes", title: "Easy WhatsApp booking", text: "Request an appointment online or on WhatsApp, and our team confirms it with you directly." },
+];
+
+// Accreditations: confirm each one with the clinic and fill in the real registration numbers.
+// Don't publish until confirmed, and don't add regulator logos without their permission.
+export const accreditations = [
+  {
+    body: "Medical and Dental Council of Nigeria (MDCN)",
+    short: "MDCN",
+    scope: "National regulator",
+    text: "Our dentists are registered and licensed to practise by the Medical and Dental Council of Nigeria.",
+    ref: "Licence no. [to be confirmed]",
+  },
+  {
+    body: "Oyo State Ministry of Health",
+    short: "Oyo State",
+    scope: "State regulator",
+    text: "Bozid Dental Clinic is a registered private health facility with the Oyo State Ministry of Health.",
+    ref: "Facility reg. no. [to be confirmed]",
+  },
+];
+
+// Virtual services (not in the discovery form: confirm with the clinic what they offer)
+export const virtualServices = [
+  { icon: "video", title: "Video consultation", text: "Speak with our team on a WhatsApp video call about symptoms, treatment options or a second opinion." },
+  { icon: "camera", title: "Photo assessment", text: "Send clear photos of your teeth or concern, and we'll advise on next steps and how soon you should come in." },
+  { icon: "chat", title: "Aftercare check-ins", text: "Ask questions after your treatment and get recovery advice from home, without another trip." },
+  { icon: "plan", title: "Treatment planning", text: "Talk through your treatment plan and costs before you visit, so your appointment is quick and clear." },
 ];
 
 export const steps = [

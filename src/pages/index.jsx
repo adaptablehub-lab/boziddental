@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import Hero from "../components/Hero.jsx";
 import BookingForm from "../components/Booking.jsx";
 import {
-  ContactList, Cta, FaqList, FirstVisit, HoursTable, Intro,
-  ReviewsGrid, ReviewsSlider, ServicesList, ServicesPreview, TeamGrid, WhyUs,
+  Accreditations, ContactList, Cta, FaqList, FirstVisit, HoursTable, Intro,
+  ReviewsGrid, ReviewsSlider, ServicesList, ServicesPreview, TeamGrid, VirtualServices, WhyUs,
 } from "../components/Sections.jsx";
 import { Button, PageHero, Tag, WhatsAppIcon } from "../components/ui.jsx";
 import { clinic, faqs, waLink } from "../data.js";
@@ -21,8 +21,10 @@ export function Home() {
       <Hero />
       <ServicesPreview />
       <WhyUs />
+      <VirtualServices />
       <FirstVisit />
       <ReviewsSlider />
+      <Accreditations />
       <FaqList items={faqs.slice(0, 4)} />
       <Cta />
     </>
@@ -38,6 +40,7 @@ export function About() {
       </PageHero>
       <Intro more={false} />
       <WhyUs />
+      <Accreditations grey />
       <section className="section section--grey">
         <div className="wrap visit">
           <div>

@@ -42,6 +42,8 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 - `cta.jpg`: wide photo for the bottom banner
 
 ## Still needed from the clinic (all in `src/data.js`)
+- **Accreditations (`accreditations`):** confirm the clinic is registered with the Medical and Dental Council of Nigeria (MDCN) and the Oyo State Ministry of Health, and add the real licence/registration numbers. Don't publish these claims until confirmed, and only add regulator logos with their permission.
+- **Virtual services (`virtualServices`):** not in the discovery form; confirm what the clinic actually offers.
 - **Team:** the client was "not sure" about featuring staff. Profiles are set up with the fields they asked for (qualifications, specialties, years of experience, short bio) but need real details and photos, or remove the Team page from `nav`.
 - **Reviews:** replace the sample testimonials with real ones (with permission).
 
@@ -81,5 +83,6 @@ Stock photos are from [Pexels](https://www.pexels.com) and used under the [Pexel
 | value-3.jpg | https://www.pexels.com/photo/3881145/ |
 | value-4.jpg | https://www.pexels.com/photo/16903232/ |
 | value-5.jpg | https://www.pexels.com/photo/5915255/ |
+| cat-preventive.jpg | https://www.pexels.com/photo/32644642/ |
 
 Team photos (`team-1…4.jpg`) are intentionally left as placeholders: use real photos of your own staff.

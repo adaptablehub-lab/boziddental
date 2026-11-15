@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
-  aboutPoints, brand, clinic, faqs, reviews, serviceCategories, services, steps, team, waLink, whyUs,
+  accreditations, aboutPoints, brand, clinic, faqs, reviews, serviceCategories, services, steps, team, virtualServices, waLink, whyUs,
 } from "../data.js";
 import { prefersReducedMotion } from "../hooks/index.js";
 import { Button, Photo, SectionHead, Tag, WhatsAppIcon, bookLink } from "./ui.jsx";
@@ -95,7 +95,8 @@ export function ServicesList() {
 
 /** Home page: interactive expanding panels, one per service category. */
 export function ServicesPreview() {
-  const [active, setActive] = useState(0);
+  // -1 = none open: all panels start the same size
+  const [active, setActive] = useState(-1);
   // Hover expands a panel on devices with a mouse; touch and keyboard use the panel's button
   const canHover = typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
@@ -103,7 +104,7 @@ export function ServicesPreview() {
     <section className="section section--grey">
       <div className="wrap">
         <SectionHead tag="Our services" title="Complete dental care under one roof" aside={<Button to="/services">All {services.length} services</Button>} />
-        <div className="cat-panels">
+        <div className={active === -1 ? "cat-panels" : "cat-panels has-active"} onMouseLeave={canHover ? () => setActive(-1) : undefined}>
           {serviceCategories.map((c, i) => {
             const items = services.filter((s) => s.category === c.id);
             const isActive = active === i;
@@ -119,7 +120,7 @@ export function ServicesPreview() {
                   className="cat-panel__head"
                   aria-expanded={isActive}
                   aria-controls={`cat-${c.id}`}
-                  onClick={() => setActive(i)}
+                  onClick={() => setActive(isActive ? -1 : i)}
                 >
                   <span className="cat-panel__meta">
                     <span className="cat-panel__num">0{i + 1}</span>
@@ -149,7 +150,7 @@ export function ServicesPreview() {
   );
 }
 
-/* ---------- Why us: continuous sliding cards ---------- */
+/* ---------- Why us: swipe / drag slider ---------- */
 function ValueCard({ v, n }) {
   return (
     <Photo name={v.image} className="value">
@@ -163,31 +164,160 @@ function ValueCard({ v, n }) {
 }
 
 export function WhyUs() {
-  const [paused, setPaused] = useState(false);
+  const ref = useRef(null);
+  const drag = useRef(null);
+  const [progress, setProgress] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = () => {
+    const el = ref.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setProgress(max > 0 ? el.scrollLeft / max : 0);
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft >= max - 2);
+  };
+  useEffect(() => {
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const step = (dir) => {
+    const el = ref.current;
+    const card = el?.querySelector(".value");
+    const w = card ? card.getBoundingClientRect().width + 16 : 360;
+    el?.scrollBy({ left: w * dir, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+  };
+
+  // Click-and-drag with a mouse (touch devices swipe natively)
+  const onPointerDown = (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    drag.current = { x: e.clientX, left: ref.current.scrollLeft, moved: false };
+  };
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d) return;
+    const dx = e.clientX - d.x;
+    // switch off smooth scrolling and snapping straight away so the row follows the pointer exactly
+    if (!d.moved && Math.abs(dx) > 4) { d.moved = true; ref.current.classList.add("is-dragging"); }
+    if (d.moved) ref.current.scrollLeft = d.left - dx;
+  };
+  const endDrag = () => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d?.moved) return;
+    ref.current.classList.remove("is-dragging");
+    // let scroll-snap settle on the nearest card
+    const el = ref.current;
+    const card = el.querySelector(".value");
+    const w = card ? card.getBoundingClientRect().width + 16 : 360;
+    el.scrollTo({ left: Math.round(el.scrollLeft / w) * w, behavior: "smooth" });
+  };
+
   return (
     <section className="section" id="why">
       <div className="wrap">
-        <SectionHead tag="Why choose us" title="Trusted care, with real attention to how you feel">
-          Five reasons patients across Ibadan choose Bozid Dental. Hover or tap to pause.
-        </SectionHead>
+        <SectionHead
+          tag="Why choose us"
+          title="Trusted care, with real attention to how you feel"
+          aside={
+            <div className="scroller-nav">
+              <button type="button" onClick={() => step(-1)} disabled={atStart} aria-label="Previous card">←</button>
+              <button type="button" onClick={() => step(1)} disabled={atEnd} aria-label="Next card">→</button>
+            </div>
+          }
+        />
       </div>
       <div
-        className={paused ? "marquee is-paused" : "marquee"}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-        onTouchStart={() => setPaused((p) => !p)}
+        className="values"
+        ref={ref}
+        onScroll={update}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        onDragStart={(e) => e.preventDefault()}
+        role="region"
+        aria-label="Why choose us"
+        tabIndex={0}
       >
-        {/* the list is rendered twice so the loop is seamless; the copy is hidden from screen readers */}
-        <div className="marquee__track" style={{ "--count": whyUs.length }}>
-          <div className="marquee__group">
-            {whyUs.map((v, i) => <ValueCard key={v.title} v={v} n={i + 1} />)}
-          </div>
-          <div className="marquee__group" aria-hidden="true">
-            {whyUs.map((v, i) => <ValueCard key={v.title} v={v} n={i + 1} />)}
-          </div>
+        {whyUs.map((v, i) => <ValueCard key={v.title} v={v} n={i + 1} />)}
+      </div>
+      <div className="wrap">
+        <div className="slider-progress" aria-hidden="true"><i style={{ width: `${Math.max(12, progress * 100)}%` }} /></div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Accreditations ---------- */
+export function Accreditations({ grey = false }) {
+  return (
+    <section className={grey ? "section section--grey" : "section"} id="accreditations">
+      <div className="wrap accred">
+        <div className="accred__intro">
+          <Tag>Licensed &amp; accredited</Tag>
+          <h2 className="h-lg">Registered with Nigeria's dental and Oyo State health regulators</h2>
+          <p className="muted">Your care is in qualified hands. Our dentists and our clinic meet the standards set by national and state regulators.</p>
         </div>
+        <ul className="accred__list">
+          {accreditations.map((a) => (
+            <li className="accred__card" key={a.short}>
+              <span className="accred__badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3 5 6v5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6z" /><path d="m9 12 2.2 2.2L15.5 10" />
+                </svg>
+              </span>
+              <div>
+                <span className="accred__scope">{a.scope}</span>
+                <h3>{a.body}</h3>
+                <p>{a.text}</p>
+                <span className="accred__ref">{a.ref}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Virtual services ---------- */
+const vIcons = {
+  video: <path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm13 3 5-3v10l-5-3" />,
+  camera: <path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm8 9a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />,
+  chat: <path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5" />,
+  plan: <path d="M7 3h10l3 3v15H4V3h3zm1 7h8M8 14h8M8 18h5" />,
+};
+
+export function VirtualServices() {
+  return (
+    <section className="section virtual" id="virtual">
+      <img className="virtual__smile" src={brand("smile-white.png")} alt="" aria-hidden="true" />
+      <div className="wrap virtual__inner">
+        <div className="virtual__intro">
+          <Tag light>Virtual services</Tag>
+          <h2 className="h-lg">Dental advice from wherever you are</h2>
+          <p>Can't get to the clinic yet? Start with a virtual consultation on WhatsApp. We'll listen, advise and help you plan your next step.</p>
+          <div className="btn-row">
+            <a className="btn btn--wa" href={waLink("Hello Bozid Dental, I'd like a virtual consultation.")} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />Start a virtual consultation</a>
+            <Button light to={bookLink("Virtual consultation")}>Schedule a call</Button>
+          </div>
+          <p className="virtual__note">Virtual advice can't replace an in-person examination. We'll let you know if you need to come in.</p>
+        </div>
+        <ul className="virtual__grid">
+          {virtualServices.map((v) => (
+            <li className="vcard" key={v.title}>
+              <span className="vcard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{vIcons[v.icon]}</svg>
+              </span>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
