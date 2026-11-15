@@ -1,16 +1,18 @@
 (() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // Footer year
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // Sticky header shadow
+  // Header: transparent over hero, solid after scrolling
   const header = document.querySelector(".header");
-  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Mobile nav
-  const toggle = document.querySelector(".nav__toggle");
+  // Mobile menu
+  const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("nav-menu");
   const setMenu = (open) => {
     toggle.setAttribute("aria-expanded", String(open));
@@ -22,64 +24,57 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
   // Reveal on scroll
-  const revealEls = document.querySelectorAll(".section__head, .card, .person, .steps li, .split__copy, .info, .faq details");
-  if ("IntersectionObserver" in window) {
+  const revealEls = document.querySelectorAll(".section-head, .about > *, .service, .value, .split > *, .review, .member, .book > *, .faq-wrap > *, .cta");
+  if ("IntersectionObserver" in window && !reduceMotion) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     revealEls.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
   }
 
-  // Reviews slider
+  // Values: horizontal scroller arrows
+  const scroller = document.querySelector("[data-scroller]");
+  document.querySelectorAll("[data-scroll]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = scroller.querySelector(".value");
+      const step = card ? card.getBoundingClientRect().width + 16 : 400;
+      scroller.scrollBy({ left: step * Number(btn.dataset.scroll), behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  });
+
+  // Reviews slider (moves one card at a time; shows 1–3 depending on width)
   const slider = document.querySelector("[data-slider]");
   if (slider) {
-    const track = slider.querySelector(".slider__track");
-    const slides = Array.from(track.children);
-    const dotsWrap = slider.querySelector(".slider__dots");
+    const track = slider.querySelector(".reviews__track");
+    const cards = Array.from(track.children);
+    const section = slider.closest("section");
     let index = 0;
-    let timer;
 
-    const dots = slides.map((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("role", "tab");
-      b.setAttribute("aria-label", `Show review ${i + 1}`);
-      b.addEventListener("click", () => { go(i); restart(); });
-      dotsWrap.appendChild(b);
-      return b;
-    });
-
+    const perView = () => {
+      const w = cards[0].getBoundingClientRect().width;
+      return Math.max(1, Math.round(track.getBoundingClientRect().width / (w + 16)));
+    };
     const go = (i) => {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((d, n) => d.setAttribute("aria-selected", String(n === index)));
+      const max = Math.max(0, cards.length - perView());
+      index = Math.min(Math.max(i, 0), max);
+      const step = cards[0].getBoundingClientRect().width + 16;
+      track.style.transform = `translateX(-${index * step}px)`;
     };
-    const restart = () => {
-      clearInterval(timer);
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        timer = setInterval(() => go(index + 1), 6000);
-      }
-    };
-
-    slider.querySelector("[data-prev]").addEventListener("click", () => { go(index - 1); restart(); });
-    slider.querySelector("[data-next]").addEventListener("click", () => { go(index + 1); restart(); });
-    slider.addEventListener("mouseenter", () => clearInterval(timer));
-    slider.addEventListener("mouseleave", restart);
-    go(0);
-    restart();
+    section.querySelector("[data-prev]").addEventListener("click", () => go(index - 1));
+    section.querySelector("[data-next]").addEventListener("click", () => {
+      const max = Math.max(0, cards.length - perView());
+      go(index >= max ? 0 : index + 1);
+    });
+    window.addEventListener("resize", () => go(index));
   }
 
   // Booking form
   const form = document.getElementById("booking-form");
   if (form) {
     const status = form.querySelector(".form__status");
-    const dateInput = form.querySelector('input[type="date"]');
-    dateInput.min = new Date().toISOString().split("T")[0];
+    form.querySelector('input[type="date"]').min = new Date().toISOString().split("T")[0];
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -89,32 +84,21 @@
         field.classList.toggle("is-invalid", !ok);
         if (!ok) valid = false;
       });
-
       if (!valid) {
         status.textContent = "Please fill in all required fields.";
         status.className = "form__status is-err";
         return;
       }
 
-      // TODO: connect to a real backend or form service (e.g. Formspree, Netlify Forms).
-      // For now, we open the visitor's email client with the request pre-filled.
-      const data = Object.fromEntries(new FormData(form));
-      const body = [
-        `Name: ${data.name}`,
-        `Phone: ${data.phone}`,
-        `Email: ${data.email}`,
-        `Service: ${data.service}`,
-        `Preferred date: ${data.date}`,
-        `Message: ${data.message || "-"}`,
-      ].join("\n");
-      window.location.href =
-        `mailto:hello@boziddental.com?subject=${encodeURIComponent("Appointment request: " + data.service)}&body=${encodeURIComponent(body)}`;
+      // TODO: connect to a form service (e.g. Formspree) to receive requests directly.
+      const d = Object.fromEntries(new FormData(form));
+      const body = `Name: ${d.name}\nPhone: ${d.phone}\nEmail: ${d.email}\nService: ${d.service}\nPreferred date: ${d.date}\nMessage: ${d.message || "-"}`;
+      window.location.href = `mailto:hello@boziddental.com?subject=${encodeURIComponent("Appointment request: " + d.service)}&body=${encodeURIComponent(body)}`;
 
-      status.textContent = "Thank you! Your email app should open to send your request. We'll confirm within one business day.";
+      status.textContent = "Thank you! Your email app should open to send the request. We'll confirm within one business day.";
       status.className = "form__status is-ok";
       form.reset();
     });
-
     form.addEventListener("input", (e) => e.target.classList.remove("is-invalid"));
   }
 })();

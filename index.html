@@ -4,262 +4,250 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bozid Dental Clinic | Gentle, Modern Dentistry</title>
-  <meta name="description" content="Bozid Dental Clinic offers gentle, modern family dentistry: check-ups, cleaning, whitening, implants, orthodontics and emergency care. Book your appointment today." />
+  <meta name="description" content="Bozid Dental Clinic offers gentle, modern family dentistry: check-ups, whitening, implants, orthodontics and same-day emergency care." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===== Top bar ===== -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <span>Mon–Fri 8:00–18:00 · Sat 9:00–14:00</span>
-      <a href="tel:+10000000000">Emergency line: +1 (000) 000-0000</a>
-    </div>
-  </div>
-
-  <!-- ===== Header ===== -->
+  <!-- ============ Header ============ -->
   <header class="header" id="top">
-    <div class="container header__inner">
+    <div class="wrap header__inner">
       <a href="#top" class="logo" aria-label="Bozid Dental home">
-        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5c-3-2.5-7.5-2.7-10 0-2.6 2.8-1.8 7.3-.6 10.6 1 2.7 1.3 5.5 1.8 8.4.4 2.4 1.3 4 2.8 4 1.8 0 2.2-2.3 2.6-4.4.4-2.3.9-4.6 3.4-4.6s3 2.3 3.4 4.6c.4 2.1.8 4.4 2.6 4.4 1.5 0 2.4-1.6 2.8-4 .5-2.9.8-5.7 1.8-8.4 1.2-3.3 2-7.8-.6-10.6-2.5-2.7-7-2.5-10 0z" fill="currentColor"/></svg>
-        <span>Bozid <em>Dental</em></span>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5c-3-2.5-7.5-2.7-10 0-2.6 2.8-1.8 7.3-.6 10.6 1 2.7 1.3 5.5 1.8 8.4.4 2.4 1.3 4 2.8 4 1.8 0 2.2-2.3 2.6-4.4.4-2.3.9-4.6 3.4-4.6s3 2.3 3.4 4.6c.4 2.1.8 4.4 2.6 4.4 1.5 0 2.4-1.6 2.8-4 .5-2.9.8-5.7 1.8-8.4 1.2-3.3 2-7.8-.6-10.6-2.5-2.7-7-2.5-10 0z" fill="currentColor"/></svg>
+        Bozid Dental
       </a>
-      <nav class="nav" aria-label="Main">
-        <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-        <ul class="nav__menu" id="nav-menu">
-          <li><a href="#services">Services</a></li>
+      <nav aria-label="Main">
+        <ul class="nav" id="nav-menu">
           <li><a href="#about">About</a></li>
-          <li><a href="#team">Our Team</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Team</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#book" class="btn btn--primary btn--sm">Book Appointment</a></li>
+          <li class="nav__cta"><a href="#book" class="btn btn--light">Book a visit<span class="btn__arrow" aria-hidden="true">→</span></a></li>
         </ul>
       </nav>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu"><span></span><span></span></button>
     </div>
   </header>
 
   <main id="main">
-    <!-- ===== Hero ===== -->
+    <!-- ============ Hero ============ -->
     <section class="hero">
-      <div class="container hero__inner">
+      <div class="hero__media photo" style="background-image:url('assets/img/hero.jpg'),var(--ph)" role="img" aria-label="Bright, modern dental treatment room"></div>
+      <div class="wrap hero__content">
         <div class="hero__copy">
-          <p class="eyebrow">Family &amp; Cosmetic Dentistry</p>
-          <h1>Healthy smiles, <span class="accent">gentle</span> care.</h1>
-          <p class="lead">From routine check-ups to complete smile makeovers, our team uses modern technology and a calm, patient-first approach to keep your family smiling for life.</p>
-          <div class="hero__actions">
-            <a href="#book" class="btn btn--primary">Book an Appointment</a>
-            <a href="#services" class="btn btn--ghost">Explore Services</a>
-          </div>
-          <ul class="hero__stats">
-            <li><strong>15+</strong><span>Years of care</span></li>
-            <li><strong>8,000+</strong><span>Happy patients</span></li>
-            <li><strong>Same‑day</strong><span>Emergency visits</span></li>
-          </ul>
+          <span class="tag tag--light">Family &amp; cosmetic dentistry</span>
+          <h1>Gentle care for confident, healthy smiles.</h1>
         </div>
-        <div class="hero__art" aria-hidden="true">
-          <div class="hero__blob"></div>
-          <svg class="hero__tooth" viewBox="0 0 200 220">
-            <defs>
-              <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#ffffff"/>
-                <stop offset="1" stop-color="#dff3f1"/>
-              </linearGradient>
-            </defs>
-            <path d="M100 30c-19-16-47-17-63 0-16 18-11 46-4 67 7 17 8 35 11 53 3 15 8 25 18 25 11 0 14-14 16-28 3-14 6-29 22-29s19 15 22 29c2 14 5 28 16 28 10 0 15-10 18-25 3-18 4-36 11-53 7-21 12-49-4-67-16-17-44-16-63 0z" fill="url(#tg)" stroke="#0f766e" stroke-width="4"/>
-            <path d="M58 60c6-10 18-14 28-10" fill="none" stroke="#5eead4" stroke-width="6" stroke-linecap="round"/>
-          </svg>
-          <div class="hero__card hero__card--a">
-            <span class="dot"></span> Now accepting new patients
-          </div>
-          <div class="hero__card hero__card--b">
-            <strong>4.9 ★</strong> average patient rating
-          </div>
+        <div class="hero__side">
+          <p>Modern technology, honest advice and a calm, unhurried approach for every member of your family.</p>
+          <a href="#book" class="btn btn--light">Book an appointment<span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
+      </div>
+      <div class="wrap hero__bar">
+        <div><strong>15+</strong><span>Years caring for smiles</span></div>
+        <div><strong>4.9★</strong><span>Average patient rating</span></div>
+        <div><strong>Same day</strong><span>Emergency appointments</span></div>
       </div>
     </section>
 
-    <!-- ===== Services ===== -->
-    <section class="section" id="services">
-      <div class="container">
-        <header class="section__head">
-          <p class="eyebrow">What we do</p>
-          <h2>Complete dental care under one roof</h2>
-          <p>Preventive, restorative and cosmetic treatments for every age, delivered with transparency and comfort.</p>
-        </header>
-        <div class="grid grid--services">
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4v5l3 2"/></svg></div>
-            <h3>Check-ups &amp; Cleaning</h3>
-            <p>Thorough exams, digital X-rays and professional cleaning to prevent problems before they start.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"/></svg></div>
-            <h3>Teeth Whitening</h3>
-            <p>Safe in-chair and take-home whitening for a noticeably brighter smile in as little as one visit.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M8 8h8l-1 6H9zM10 14v8M14 14v8"/></svg></div>
-            <h3>Dental Implants</h3>
-            <p>Permanent, natural-looking replacements for missing teeth that restore full chewing confidence.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M6 9v6M10 9v6M14 9v6M18 9v6"/></svg></div>
-            <h3>Orthodontics</h3>
-            <p>Clear aligners and modern braces for straighter teeth and a healthier bite, for teens and adults.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M4 20c2-6 6-9 8-9s6 3 8 9M12 11V4M9 7h6"/></svg></div>
-            <h3>Root Canal &amp; Fillings</h3>
-            <p>Gentle, pain-managed treatment that saves damaged teeth with tooth-coloured materials.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></div>
-            <h3>Kids' Dentistry</h3>
-            <p>Friendly, fear-free visits that build good habits and help children love their check-ups.</p>
-          </article>
-          <article class="card">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M5 5h14v14H5zM9 9h6v6H9z"/></svg></div>
-            <h3>Crowns &amp; Veneers</h3>
-            <p>Custom porcelain restorations that repair, reshape and perfect the look of your teeth.</p>
-          </article>
-          <article class="card card--accent">
-            <div class="card__icon"><svg viewBox="0 0 24 24"><path d="M12 2L3 20h18zM12 9v5M12 17v.5"/></svg></div>
-            <h3>Emergency Care</h3>
-            <p>Toothache, chipped tooth or swelling? Call us and we'll see you the same day whenever possible.</p>
-            <a href="tel:+10000000000" class="card__link">Call emergency line →</a>
-          </article>
+    <!-- ============ About ============ -->
+    <section class="section" id="about">
+      <div class="wrap about">
+        <div>
+          <span class="tag">About us</span>
+          <h2 class="h-lg">We combine clinical expertise with a genuinely caring approach to dentistry.</h2>
+          <a href="#book" class="btn">Meet us in person<span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
+        <ul class="about__list">
+          <li><span>01</span><div><h3>Clear, upfront pricing</h3><p>Every option and its cost explained before any treatment begins.</p></div></li>
+          <li><span>02</span><div><h3>Comfort first</h3><p>Gentle techniques and sedation options for nervous patients.</p></div></li>
+          <li><span>03</span><div><h3>Modern technology</h3><p>Low-radiation digital X-rays and intraoral cameras.</p></div></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ===== About ===== -->
-    <section class="section section--tint" id="about">
-      <div class="container split">
-        <div class="split__art" aria-hidden="true">
-          <div class="frame">
-            <div class="frame__inner">
-              <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/><path d="M60 26c-9-7-22-8-30 0-7 9-5 22-2 32 3 8 4 16 5 25 2 7 4 12 9 12s6-7 7-13 3-14 11-14 9 7 11 14 2 13 7 13 7-5 9-12c1-9 2-17 5-25 3-10 5-23-2-32-8-8-21-7-30 0z" fill="currentColor" opacity=".9"/></svg>
-            </div>
+    <!-- ============ Services ============ -->
+    <section class="section section--grey" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="tag">Our services</span>
+            <h2 class="h-lg">Complete dental care under one roof</h2>
           </div>
+          <p>Preventive, restorative and cosmetic treatments for every age, all in one place.</p>
         </div>
-        <div class="split__copy">
-          <p class="eyebrow">Why Bozid Dental</p>
-          <h2>Dentistry that puts you at ease</h2>
-          <p>We believe a great dental visit starts with listening. Every treatment plan is explained clearly, priced upfront, and designed around your comfort and goals.</p>
-          <ul class="checks">
-            <li><strong>Modern technology</strong>: digital X-rays with minimal radiation and intraoral cameras so you see what we see.</li>
-            <li><strong>Comfort first</strong>: gentle techniques, sedation options and a relaxing environment for anxious patients.</li>
-            <li><strong>Transparent pricing</strong>: clear estimates before treatment, with flexible payment plans.</li>
-            <li><strong>Strict sterilisation</strong>: hospital-grade infection-control protocols at every step.</li>
-          </ul>
-          <a href="#book" class="btn btn--primary">Schedule your first visit</a>
+        <div class="services">
+          <article class="service">
+            <div class="service__img photo" style="background-image:url('assets/img/service-checkup.jpg'),var(--ph)"></div>
+            <details>
+              <summary><h3>Check-ups &amp; cleaning</h3><span class="plus" aria-hidden="true"></span></summary>
+              <p>Thorough exams, digital X-rays and professional cleaning to catch problems early and keep gums healthy.</p>
+            </details>
+          </article>
+          <article class="service">
+            <div class="service__img photo" style="background-image:url('assets/img/service-whitening.jpg'),var(--ph)"></div>
+            <details>
+              <summary><h3>Teeth whitening</h3><span class="plus" aria-hidden="true"></span></summary>
+              <p>Safe in-chair and take-home whitening for a noticeably brighter smile, often in a single visit.</p>
+            </details>
+          </article>
+          <article class="service">
+            <div class="service__img photo" style="background-image:url('assets/img/service-implants.jpg'),var(--ph)"></div>
+            <details>
+              <summary><h3>Dental implants</h3><span class="plus" aria-hidden="true"></span></summary>
+              <p>Permanent, natural-looking replacements for missing teeth that restore full chewing confidence.</p>
+            </details>
+          </article>
+          <article class="service">
+            <div class="service__img photo" style="background-image:url('assets/img/service-ortho.jpg'),var(--ph)"></div>
+            <details>
+              <summary><h3>Orthodontics</h3><span class="plus" aria-hidden="true"></span></summary>
+              <p>Clear aligners and modern braces for straighter teeth and a healthier bite, for teens and adults.</p>
+            </details>
+          </article>
         </div>
+        <ul class="service-chips">
+          <li>Root canal &amp; fillings</li>
+          <li>Crowns &amp; veneers</li>
+          <li>Kids' dentistry</li>
+          <li>Gum care</li>
+          <li class="chip--alert"><a href="tel:+10000000000">Emergency care · call now</a></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ===== Process ===== -->
+    <!-- ============ Values (numbered cards) ============ -->
     <section class="section">
-      <div class="container">
-        <header class="section__head">
-          <p class="eyebrow">Your first visit</p>
-          <h2>Simple from start to smile</h2>
-        </header>
-        <ol class="steps">
-          <li><span>1</span><h3>Book online or call</h3><p>Pick a time that suits you. We'll confirm within one business day.</p></li>
-          <li><span>2</span><h3>Consultation &amp; exam</h3><p>A full check-up, X-rays if needed, and an honest conversation about your goals.</p></li>
-          <li><span>3</span><h3>Your treatment plan</h3><p>Clear options, timelines and costs, with no pressure and no surprises.</p></li>
-          <li><span>4</span><h3>Ongoing care</h3><p>Friendly reminders and regular check-ups to keep your smile healthy.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ===== Team ===== -->
-    <section class="section section--tint" id="team">
-      <div class="container">
-        <header class="section__head">
-          <p class="eyebrow">Meet the team</p>
-          <h2>Experienced, caring professionals</h2>
-        </header>
-        <div class="grid grid--team">
-          <article class="person">
-            <div class="person__avatar" style="--hue:172">DB</div>
-            <h3>Dr. [Name] Bozid</h3>
-            <p class="person__role">Lead Dentist &amp; Founder</p>
-            <p>DDS · Restorative and implant dentistry</p>
-          </article>
-          <article class="person">
-            <div class="person__avatar" style="--hue:200">OR</div>
-            <h3>Dr. [Name]</h3>
-            <p class="person__role">Orthodontist</p>
-            <p>Clear aligners and braces specialist</p>
-          </article>
-          <article class="person">
-            <div class="person__avatar" style="--hue:150">PD</div>
-            <h3>Dr. [Name]</h3>
-            <p class="person__role">Paediatric Dentist</p>
-            <p>Gentle care for our youngest patients</p>
-          </article>
-          <article class="person">
-            <div class="person__avatar" style="--hue:230">HY</div>
-            <h3>[Name]</h3>
-            <p class="person__role">Dental Hygienist</p>
-            <p>Cleaning, prevention and gum health</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Reviews ===== -->
-    <section class="section" id="reviews">
-      <div class="container">
-        <header class="section__head">
-          <p class="eyebrow">Patient stories</p>
-          <h2>What our patients say</h2>
-          <p class="note">Sample reviews: replace these with real patient testimonials (with permission).</p>
-        </header>
-        <div class="slider" data-slider>
-          <div class="slider__track">
-            <blockquote class="review">
-              <p>"I used to dread the dentist. The team here explained everything and I didn't feel a thing. I actually look forward to my check-ups now."</p>
-              <footer>— Patient name, Cleaning &amp; fillings</footer>
-            </blockquote>
-            <blockquote class="review">
-              <p>"My implant looks and feels completely natural. The whole process was clear, on time and exactly the price I was quoted."</p>
-              <footer>— Patient name, Dental implant</footer>
-            </blockquote>
-            <blockquote class="review">
-              <p>"Our kids love coming here. The staff are patient, fun and genuinely kind. Highly recommend for families."</p>
-              <footer>— Patient name, Family patient</footer>
-            </blockquote>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="tag">Our promise</span>
+            <h2 class="h-lg">What you can expect at every visit</h2>
           </div>
-          <div class="slider__controls">
-            <button class="slider__btn" data-prev aria-label="Previous review">←</button>
-            <div class="slider__dots" role="tablist"></div>
-            <button class="slider__btn" data-next aria-label="Next review">→</button>
+          <div class="scroller-nav">
+            <button type="button" data-scroll="-1" aria-label="Scroll left">←</button>
+            <button type="button" data-scroll="1" aria-label="Scroll right">→</button>
           </div>
         </div>
       </div>
+      <div class="values" data-scroller>
+        <article class="value photo" style="background-image:url('assets/img/value-1.jpg'),var(--ph)">
+          <span class="value__num">01</span>
+          <div><h3>We listen first</h3><p>Your concerns and goals shape every treatment plan we suggest.</p></div>
+        </article>
+        <article class="value photo" style="background-image:url('assets/img/value-2.jpg'),var(--ph)">
+          <span class="value__num">02</span>
+          <div><h3>No surprises</h3><p>Transparent estimates and flexible payment plans before we start.</p></div>
+        </article>
+        <article class="value photo" style="background-image:url('assets/img/value-3.jpg'),var(--ph)">
+          <span class="value__num">03</span>
+          <div><h3>Pain-free focus</h3><p>Gentle techniques and modern anaesthetics for a comfortable visit.</p></div>
+        </article>
+        <article class="value photo" style="background-image:url('assets/img/value-4.jpg'),var(--ph)">
+          <span class="value__num">04</span>
+          <div><h3>Spotless standards</h3><p>Hospital-grade sterilisation and infection control at every step.</p></div>
+        </article>
+      </div>
     </section>
 
-    <!-- ===== Booking ===== -->
-    <section class="section section--dark" id="book">
-      <div class="container split split--form">
+    <!-- ============ Partners strip ============ -->
+    <section class="partners">
+      <div class="wrap">
+        <p>We work with most major insurance providers</p>
+        <ul>
+          <li>Insurer One</li><li>Insurer Two</li><li>Insurer Three</li><li>Insurer Four</li><li>Insurer Five</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Split: first visit ============ -->
+    <section class="section">
+      <div class="wrap split">
+        <div class="split__img photo" style="background-image:url('assets/img/first-visit.jpg'),var(--ph)" role="img" aria-label="Dentist talking with a patient"></div>
         <div class="split__copy">
-          <p class="eyebrow eyebrow--light">Book an appointment</p>
-          <h2>Ready for a healthier smile?</h2>
-          <p>Send us your preferred date and time and we'll get back to you within one business day to confirm. For urgent pain, please call us directly.</p>
-          <ul class="contact-list">
-            <li><span>Phone</span><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
-            <li><span>Email</span><a href="mailto:hello@boziddental.com">hello@boziddental.com</a></li>
-            <li><span>Address</span>123 Smile Avenue, Your City</li>
+          <span class="tag">Your first visit</span>
+          <h2 class="h-lg">Simple from first call to finished smile</h2>
+          <p class="muted">We keep things relaxed and clear, so you always know what's happening and why.</p>
+          <ol class="steps">
+            <li><h3>Book online or call</h3><p>Pick a time that suits you. We confirm within one business day.</p></li>
+            <li><h3>Exam &amp; consultation</h3><p>A full check-up and an honest conversation about your goals.</p></li>
+            <li><h3>Your personal plan</h3><p>Clear options, timelines and costs, with no pressure.</p></li>
+          </ol>
+          <a href="#book" class="btn">Book your first visit<span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Testimonials ============ -->
+    <section class="section section--grey" id="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="tag">Patient stories</span>
+            <h2 class="h-lg">What our patients say</h2>
+          </div>
+          <div class="scroller-nav">
+            <button type="button" data-prev aria-label="Previous review">←</button>
+            <button type="button" data-next aria-label="Next review">→</button>
+          </div>
+        </div>
+        <div class="reviews" data-slider>
+          <div class="reviews__track">
+            <blockquote class="review">
+              <p>“I used to dread the dentist. The team explained everything and I didn't feel a thing. I actually look forward to check-ups now.”</p>
+              <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Cleaning &amp; fillings</small></div></footer>
+            </blockquote>
+            <blockquote class="review">
+              <p>“My implant looks and feels completely natural. Everything was on time and exactly the price I was quoted.”</p>
+              <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Dental implant</small></div></footer>
+            </blockquote>
+            <blockquote class="review">
+              <p>“Our kids love coming here. The staff are patient, fun and genuinely kind. Highly recommended for families.”</p>
+              <footer><span class="avatar">P</span><div><strong>Patient name</strong><small>Family patient</small></div></footer>
+            </blockquote>
+          </div>
+        </div>
+        <p class="note">Sample reviews: replace with real patient testimonials (with permission).</p>
+      </div>
+    </section>
+
+    <!-- ============ Team ============ -->
+    <section class="section" id="team">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="tag">Our team</span>
+            <h2 class="h-lg">The people behind your smile</h2>
+          </div>
+          <p>Experienced clinicians who care about doing things properly and kindly.</p>
+        </div>
+        <div class="team">
+          <article class="member"><div class="member__img photo" style="background-image:url('assets/img/team-1.jpg'),var(--ph)"><span class="tag tag--light">Founder</span></div><h3>Dr. [Name] Bozid</h3><p>Lead dentist · Restorative &amp; implants</p></article>
+          <article class="member"><div class="member__img photo" style="background-image:url('assets/img/team-2.jpg'),var(--ph)"></div><h3>Dr. [Name]</h3><p>Orthodontist · Aligners &amp; braces</p></article>
+          <article class="member"><div class="member__img photo" style="background-image:url('assets/img/team-3.jpg'),var(--ph)"></div><h3>Dr. [Name]</h3><p>Paediatric dentist</p></article>
+          <article class="member"><div class="member__img photo" style="background-image:url('assets/img/team-4.jpg'),var(--ph)"></div><h3>[Name]</h3><p>Dental hygienist</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Booking + FAQ ============ -->
+    <section class="section section--grey" id="book">
+      <div class="wrap book">
+        <div>
+          <span class="tag">Book an appointment</span>
+          <h2 class="h-lg">Ready for a healthier smile?</h2>
+          <p class="muted">Send your preferred date and we'll confirm within one business day. In pain? Call us directly.</p>
+          <ul class="contact">
+            <li><small>Phone</small><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+            <li><small>Email</small><a href="mailto:hello@boziddental.com">hello@boziddental.com</a></li>
+            <li><small>Address</small><span>123 Smile Avenue, Your City</span></li>
+            <li><small>Hours</small><span>Mon–Fri 8:00–18:00 · Sat 9:00–14:00</span></li>
           </ul>
         </div>
         <form class="form" id="booking-form" novalidate>
@@ -272,75 +260,70 @@
             <label>Service
               <select name="service" required>
                 <option value="">Choose a service</option>
-                <option>Check-up &amp; Cleaning</option>
-                <option>Teeth Whitening</option>
-                <option>Dental Implants</option>
+                <option>Check-up &amp; cleaning</option>
+                <option>Teeth whitening</option>
+                <option>Dental implants</option>
                 <option>Orthodontics</option>
-                <option>Root Canal / Filling</option>
-                <option>Kids' Dentistry</option>
-                <option>Crowns &amp; Veneers</option>
+                <option>Root canal / filling</option>
+                <option>Crowns &amp; veneers</option>
+                <option>Kids' dentistry</option>
                 <option>Emergency</option>
               </select>
             </label>
             <label>Preferred date<input name="date" type="date" required /></label>
           </div>
-          <label>Message <span class="optional">(optional)</span><textarea name="message" rows="3"></textarea></label>
-          <button type="submit" class="btn btn--primary btn--block">Request Appointment</button>
+          <label>Message <span class="muted">(optional)</span><textarea name="message" rows="3"></textarea></label>
+          <button type="submit" class="btn btn--block">Request appointment<span class="btn__arrow" aria-hidden="true">→</span></button>
           <p class="form__status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
 
-    <!-- ===== FAQ ===== -->
     <section class="section" id="faq">
-      <div class="container container--narrow">
-        <header class="section__head">
-          <p class="eyebrow">FAQ</p>
-          <h2>Common questions</h2>
-        </header>
+      <div class="wrap faq-wrap">
+        <div>
+          <span class="tag">FAQ</span>
+          <h2 class="h-lg">Common questions</h2>
+        </div>
         <div class="faq">
-          <details><summary>Do you accept new patients?</summary><p>Yes. We welcome new patients of all ages. Book online or call us to schedule your first exam.</p></details>
-          <details><summary>Do you accept dental insurance?</summary><p>We work with most major insurance providers and will help you understand your coverage before treatment. Contact us with your plan details.</p></details>
-          <details><summary>What should I do in a dental emergency?</summary><p>Call our emergency line right away. We reserve time every day for urgent cases such as severe pain, swelling, or a knocked-out tooth.</p></details>
-          <details><summary>How often should I visit the dentist?</summary><p>For most people, a check-up and cleaning every six months is ideal. We may recommend more frequent visits depending on your oral health.</p></details>
-          <details><summary>Do you offer payment plans?</summary><p>Yes. We offer flexible monthly payment options for larger treatments such as implants and orthodontics.</p></details>
+          <details><summary>Are you accepting new patients?<span class="plus" aria-hidden="true"></span></summary><p>Yes. We welcome new patients of all ages. Book online or call to schedule your first exam.</p></details>
+          <details><summary>Do you accept dental insurance?<span class="plus" aria-hidden="true"></span></summary><p>We work with most major providers and will help you understand your cover before treatment.</p></details>
+          <details><summary>What should I do in a dental emergency?<span class="plus" aria-hidden="true"></span></summary><p>Call us right away. We keep time free every day for urgent cases like severe pain, swelling or a knocked-out tooth.</p></details>
+          <details><summary>How often should I visit?<span class="plus" aria-hidden="true"></span></summary><p>For most people, a check-up and cleaning every six months. We may suggest more often depending on your oral health.</p></details>
+          <details><summary>Do you offer payment plans?<span class="plus" aria-hidden="true"></span></summary><p>Yes. Flexible monthly plans are available for larger treatments such as implants and orthodontics.</p></details>
         </div>
       </div>
     </section>
 
-    <!-- ===== Contact / Hours ===== -->
-    <section class="section section--tint" id="contact">
-      <div class="container grid grid--contact">
-        <div class="info">
-          <h3>Visit us</h3>
-          <p>123 Smile Avenue<br />Your City, Postcode</p>
-          <p><a href="https://maps.google.com/?q=123+Smile+Avenue" target="_blank" rel="noopener">Get directions →</a></p>
-        </div>
-        <div class="info">
-          <h3>Opening hours</h3>
-          <table class="hours">
-            <tr><th>Mon – Fri</th><td>8:00 – 18:00</td></tr>
-            <tr><th>Saturday</th><td>9:00 – 14:00</td></tr>
-            <tr><th>Sunday</th><td>Closed (emergencies by phone)</td></tr>
-          </table>
-        </div>
-        <div class="info">
-          <h3>Get in touch</h3>
-          <p><a href="tel:+10000000000">+1 (000) 000-0000</a><br /><a href="mailto:hello@boziddental.com">hello@boziddental.com</a></p>
+    <!-- ============ CTA ============ -->
+    <section class="cta-section">
+      <div class="wrap">
+        <div class="cta photo" style="background-image:url('assets/img/cta.jpg'),var(--ph)">
+          <h2>Your healthiest smile starts with one visit.</h2>
+          <p>Gentle, modern dentistry for the whole family, right in your neighbourhood.</p>
+          <a href="#book" class="btn btn--light">Book a visit<span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ===== Footer ===== -->
+  <!-- ============ Footer ============ -->
   <footer class="footer">
-    <div class="container footer__inner">
-      <a href="#top" class="logo logo--light">
-        <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5c-3-2.5-7.5-2.7-10 0-2.6 2.8-1.8 7.3-.6 10.6 1 2.7 1.3 5.5 1.8 8.4.4 2.4 1.3 4 2.8 4 1.8 0 2.2-2.3 2.6-4.4.4-2.3.9-4.6 3.4-4.6s3 2.3 3.4 4.6c.4 2.1.8 4.4 2.6 4.4 1.5 0 2.4-1.6 2.8-4 .5-2.9.8-5.7 1.8-8.4 1.2-3.3 2-7.8-.6-10.6-2.5-2.7-7-2.5-10 0z" fill="currentColor"/></svg>
-        <span>Bozid <em>Dental</em></span>
-      </a>
-      <p>© <span id="year"></span> Bozid Dental Clinic. All rights reserved.</p>
-      <a href="#top" class="footer__top">Back to top ↑</a>
+    <div class="wrap footer__top">
+      <div>
+        <a href="#top" class="logo">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5c-3-2.5-7.5-2.7-10 0-2.6 2.8-1.8 7.3-.6 10.6 1 2.7 1.3 5.5 1.8 8.4.4 2.4 1.3 4 2.8 4 1.8 0 2.2-2.3 2.6-4.4.4-2.3.9-4.6 3.4-4.6s3 2.3 3.4 4.6c.4 2.1.8 4.4 2.6 4.4 1.5 0 2.4-1.6 2.8-4 .5-2.9.8-5.7 1.8-8.4 1.2-3.3 2-7.8-.6-10.6-2.5-2.7-7-2.5-10 0z" fill="currentColor"/></svg>
+          Bozid Dental
+        </a>
+        <p>Gentle, modern dentistry for the whole family.</p>
+      </div>
+      <div><h4>Visit</h4><p>123 Smile Avenue<br />Your City, Postcode</p></div>
+      <div><h4>Hours</h4><p>Mon–Fri 8:00–18:00<br />Sat 9:00–14:00<br />Sun closed</p></div>
+      <div><h4>Contact</h4><p><a href="tel:+10000000000">+1 (000) 000-0000</a><br /><a href="mailto:hello@boziddental.com">hello@boziddental.com</a></p></div>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© <span id="year"></span> Bozid Dental Clinic</p>
+      <a href="#top">Back to top ↑</a>
     </div>
   </footer>
 
