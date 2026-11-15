@@ -8,17 +8,16 @@ const DELAY = 6000;
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [stopped, setStopped] = useState(false); // user pressed pause
   const [cycle, setCycle] = useState(0); // bumps to restart the progress bar on manual picks
   const [reduceMotion, setReduceMotion] = useState(false);
   useEffect(() => setReduceMotion(prefersReducedMotion()), []);
 
   // Auto-advance
   useEffect(() => {
-    if (reduceMotion || paused || stopped) return;
+    if (reduceMotion || paused) return;
     const t = setTimeout(() => setCurrent((c) => (c + 1) % heroSlides.length), DELAY);
     return () => clearTimeout(t);
-  }, [current, paused, cycle, reduceMotion, stopped]);
+  }, [current, paused, cycle, reduceMotion]);
 
   // Pause while the tab is hidden
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function Hero() {
   useEffect(() => { if (current !== 0) setRestReady(true); }, [current]);
 
   const go = (i) => { setCurrent(i); setCycle((c) => c + 1); };
-  const isPaused = paused || reduceMotion || stopped;
+  const isPaused = paused || reduceMotion;
 
   return (
     <section
@@ -86,16 +85,6 @@ export default function Hero() {
       </div>
 
       <div className="wrap hero__nav" role="group" aria-label="Choose slide">
-        <button
-          type="button"
-          className="hero__toggle"
-          onClick={() => setStopped((s) => !s)}
-          aria-label={stopped || reduceMotion ? "Play slideshow" : "Pause slideshow"}
-        >
-          {stopped || reduceMotion
-            ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
-            : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor" /></svg>}
-        </button>
         {heroSlides.map((s, i) => (
           <button
             key={s.nav}

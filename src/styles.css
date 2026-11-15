@@ -576,9 +576,6 @@ h3 { font-size: 1.2rem; }
 #main:focus { outline: none; }
 .footer .footer__h { margin-top: 0; }
 .hero__nav { align-items: center; }
-.hero__toggle { flex: none; display: grid; place-items: center; width: 36px; height: 36px; margin-right: 6px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.3); color: #fff; cursor: pointer; backdrop-filter: blur(6px); transition: background .2s; }
-.hero__toggle:hover { background: rgba(0,0,0,.55); }
-.hero__toggle svg { width: 14px; height: 14px; }
 .footer .footer__h.footer__h4-gap { margin-top: 22px; }
 
 /* Header: tap-to-call link, shown only in the phone menu */
