@@ -32,7 +32,7 @@ Follows the *Bozid Dental Brand Guide*:
 - `public/assets/img/`: photos (replace a file with one of the same name to swap a photo)
 
 ## Photos
-Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file in `public/assets/img/` with your own photo **using the same file name** (for example `hero-1.jpg`). No code changes are needed.
+Image slots use Pexels stock photos (see credits below), and the team slots use soft placeholders. To add real photos, replace a file in `public/assets/img/` with your own photo **using the same file name** (for example `hero-1.jpg`). No code changes are needed: the build automatically creates the smaller WebP versions the site actually serves.
 
 - `hero-1…4.jpg`: the four hero slides, wide photos (about 1800×1200). Slides 1 and 4 are your own photos
 - `service-*.jpg`: one per service (14), about 1000px wide
@@ -49,10 +49,23 @@ Image slots use Pexels stock photos (see credits below), and the team slots use 
 
 The booking form sends the request through the patient's WhatsApp (to 0808 662 2159) or email app, and the clinic confirms. To receive submissions directly on a server, connect a form service (Formspree, Netlify Forms, etc.) in `src/components/Booking.jsx`.
 
+## Performance
+- Photos are served as **WebP** (about 75% smaller than JPEG), generated automatically at build time by `scripts/images.mjs`. The `.jpg` originals stay for social previews.
+- Photos **lazy-load** as they approach the screen; only the first hero slide loads with the page (and is preloaded on the home page). The home page's first load dropped from ~2.4 MB of images to ~0.2 MB.
+- JavaScript ~67 KB and CSS ~8 KB (gzipped).
+
+## Accessibility
+- Checked with axe-core (WCAG 2.2 AA): no violations on any page.
+- Keyboard: skip link, visible focus, focus moves to the new page's content after navigation, Escape closes the menu.
+- The hero slideshow has a pause/play button and respects "reduce motion".
+- Colour contrast meets AA, including the WhatsApp buttons (a darker WhatsApp green).
+
 ## SEO
 - **Pre-rendered pages:** `npm run build` renders every page to real HTML (`src/entry-server.jsx` + `scripts/prerender.mjs`), so search engines and WhatsApp/social link previews see the full content. The app then takes over in the browser.
 - **Per-page titles, descriptions and social tags** live in `src/seo.js` (`pages`). Keep titles under ~60 characters and descriptions under ~160.
 - **Structured data:** every page includes schema.org `Dentist` data (name, address, phones, hours, services); the home and FAQ pages also include `FAQPage` data.
+- **Social previews:** `og-image.jpg` (1200×630) for WhatsApp/Facebook/X link previews.
+- **Team page** is marked `noindex` (hidden from Google) until real staff details are added. Remove `noindex: true` for `/team` in `src/seo.js` then.
 - **Sitemap & robots:** `sitemap.xml` and `robots.txt` are generated at build time. On GitHub Pages the robots.txt sits under `/boziddental/`, so submit the sitemap directly in Google Search Console: https://adaptablehub-lab.github.io/boziddental/sitemap.xml
 - **Moving to a custom domain:** update `SITE_URL` and `BASE_PATH` in `src/seo.js`, `base` in `vite.config.js`, and the `basename` in `src/App.jsx` / `src/entry-server.jsx`.
 - **Next steps for the clinic:** create a Google Business Profile with the same name, address and phone numbers, and add the site link there.

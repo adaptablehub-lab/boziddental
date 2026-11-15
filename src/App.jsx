@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { applyHead } from "./head.js";
 import Header from "./components/Header.jsx";
@@ -12,7 +12,10 @@ function Layout() {
   const viewport = typeof window !== "undefined" ? window.innerHeight : 800;
 
   // Start each page at the top, and update the title/description/social tags
+  const firstLoad = useRef(true);
   useEffect(() => {
+    if (firstLoad.current) firstLoad.current = false;
+    else document.getElementById("main")?.focus({ preventScroll: true });
     window.scrollTo(0, 0);
     applyHead(pathname.length > 1 ? pathname.replace(/\/$/, "") : "/");
   }, [pathname]);
@@ -37,7 +40,7 @@ function Layout() {
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <Header scrolled={scrollY > 60} />
-      <main id="main"><Outlet /></main>
+      <main id="main" tabIndex={-1}><Outlet /></main>
       <WhatsAppFab visible={scrollY > (isHome ? viewport * 0.6 : 240) && !overlapping} />
       <Footer />
     </>

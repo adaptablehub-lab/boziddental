@@ -29,6 +29,8 @@ function headFor(path) {
     `<meta name="geo.region" content="NG-OY" />`,
     `<meta name="geo.placename" content="Ibadan" />`,
   ];
+  // the home page's first hero photo is the largest thing on screen: start downloading it immediately
+  if (path === "/") tags.unshift(`<link rel="preload" as="image" href="${seo.BASE_PATH}/assets/img/hero-1.webp" type="image/webp" fetchpriority="high" />`);
   if (!m.noindex) tags.push(jsonLd(seo.dentistSchema()));
   if (path === "/faqs" || path === "/") tags.push(jsonLd(seo.faqSchema(path === "/" ? faqs.slice(0, 4) : faqs)));
   return { m, head: tags.filter(Boolean).join("\n  ") };
@@ -55,7 +57,7 @@ const today = new Date().toISOString().slice(0, 10);
 const priority = (p) => (p === "/" ? "1.0" : p === "/services" || p === "/book" ? "0.9" : "0.7");
 writeFileSync("dist/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map((p) => `  <url><loc>${seo.absUrl(p)}</loc><lastmod>${today}</lastmod><priority>${priority(p)}</priority></url>`).join("\n")}
+${routes.filter((p) => !seo.pages[p].noindex).map((p) => `  <url><loc>${seo.absUrl(p)}</loc><lastmod>${today}</lastmod><priority>${priority(p)}</priority></url>`).join("\n")}
 </urlset>
 `);
 writeFileSync("dist/robots.txt", `User-agent: *

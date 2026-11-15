@@ -1,0 +1,14 @@
+{
+  "name": "Bozid Dental Clinic",
+  "short_name": "Bozid Dental",
+  "description": "Quality, affordable dental care on Ring Road, Ibadan.",
+  "start_url": "/boziddental/",
+  "scope": "/boziddental/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#0e113d",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

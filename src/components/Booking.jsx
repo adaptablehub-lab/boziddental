@@ -36,8 +36,11 @@ export default function BookingForm() {
     const bad = {};
     required.forEach((k) => { if (!form[k].trim()) bad[k] = true; });
     if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) bad.email = true;
+    // Nigerian numbers: 11 digits starting 0 (e.g. 0803…), or +234 / 234 followed by 10 digits
+    const digits = form.phone.replace(/[^\d+]/g, "");
+    if (form.phone.trim() && !/^(0\d{10}|\+?234\d{10})$/.test(digits)) bad.phone = true;
     setInvalid(bad);
-    return !Object.keys(bad).length;
+    return bad; // empty object = valid
   };
 
   const summary = () => [
@@ -52,8 +55,9 @@ export default function BookingForm() {
   ].filter((l) => l !== null).join("\n");
 
   const send = (via) => {
-    if (!validate()) {
-      setStatus({ ok: false, text: "Please fill in the highlighted fields." });
+    const bad = validate();
+    if (Object.keys(bad).length) {
+      setStatus({ ok: false, text: bad.phone && form.phone.trim() ? "Please enter a valid Nigerian phone number, e.g. 0803 000 0000." : "Please fill in the highlighted fields." });
       return;
     }
     const text = summary();

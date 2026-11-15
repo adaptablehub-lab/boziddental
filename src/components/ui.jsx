@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { brand, img } from "../data.js";
 
@@ -36,12 +37,28 @@ export function SectionHead({ tag, title, children, aside }) {
   );
 }
 
-/** A div with a background photo and a soft placeholder gradient behind it. */
-export function Photo({ name, className = "", label, style, children }) {
+/**
+ * A div with a background photo and a soft placeholder gradient behind it.
+ * Photos load only as they approach the screen (lazy), unless `eager` is set.
+ */
+export function Photo({ name, className = "", label, style, children, eager = false }) {
+  const ref = useRef(null);
+  const [show, setShow] = useState(eager);
+  useEffect(() => {
+    if (show) return;
+    const el = ref.current;
+    if (!el || !("IntersectionObserver" in window)) { setShow(true); return; }
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setShow(true); io.disconnect(); }
+    }, { rootMargin: "400px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [show]);
   return (
     <div
+      ref={ref}
       className={`photo ${className}`}
-      style={{ backgroundImage: `url(${img(name)}), var(--ph)`, ...style }}
+      style={{ backgroundImage: show ? `url(${img(name)}), var(--ph)` : "var(--ph)", ...style }}
       {...(label ? { role: "img", "aria-label": label } : {})}
     >
       {children}

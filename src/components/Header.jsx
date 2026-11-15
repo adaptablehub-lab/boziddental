@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { nav } from "../data.js";
+import { clinic, nav } from "../data.js";
 import { Button, Logo } from "./ui.jsx";
 
 export default function Header({ scrolled }) {
@@ -30,6 +30,9 @@ export default function Header({ scrolled }) {
                 <NavLink to={item.to} end={item.to === "/"}>{item.label}</NavLink>
               </li>
             ))}
+            <li className="nav__call">
+              <a href={clinic.primaryPhone.href}>Call {clinic.primaryPhone.display}</a>
+            </li>
             <li className="nav__cta">
               <Button light to="/book">Book appointment</Button>
             </li>

@@ -12,20 +12,20 @@ export function Footer() {
           <p className="footer__about">Quality, affordable dental care in a friendly and comfortable environment in Ibadan.</p>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h2 className="footer__h">Explore</h2>
           <ul className="footer__links">
             {footerLinks.map((l) => <li key={l.to}><Link to={l.to}>{l.label}</Link></li>)}
           </ul>
         </div>
         <div>
-          <h4>Visit</h4>
+          <h2 className="footer__h">Visit</h2>
           <p>{clinic.addressLines.map((l, i) => <span key={i}>{l}<br /></span>)}</p>
           <p><a href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">Get directions →</a></p>
-          <h4 className="footer__h4-gap">Hours</h4>
+          <h2 className="footer__h footer__h4-gap">Hours</h2>
           <p>{clinic.hours.map((h) => <span key={h.days}>{h.days}: {h.time}<br /></span>)}</p>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h2 className="footer__h">Contact</h2>
           <p>
             {clinic.phones.map((ph) => (
               <span key={ph.display}>

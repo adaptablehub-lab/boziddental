@@ -444,6 +444,7 @@ export function TeamGrid() {
   return (
     <section className="section">
       <div className="wrap">
+        <h2 className="sr-only">Our dental team</h2>
         <div className="team team--full">
           {team.map((m) => (
             <article className="member" key={m.image}>

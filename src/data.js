@@ -1,8 +1,9 @@
 // All editable site content lives here.
 // Contact details, hours, description and services come from the client discovery form.
 
-export const img = (name) => `${import.meta.env.BASE_URL}assets/img/${name}`;
-export const brand = (name) => `${import.meta.env.BASE_URL}assets/brand/${name}`;
+// Photos are served as WebP (about 75% smaller); the .jpg originals are kept for social previews.
+export const img = (name) => `${import.meta.env.BASE_URL}assets/img/${name.replace(/\.jpe?g$/, ".webp")}`;
+export const brand = (name) => `${import.meta.env.BASE_URL}assets/brand/${name.replace(/\.png$/, ".webp")}`;
 
 const WHATSAPP_MAIN = "2348086622159"; // 0808 662 2159 (WhatsApp and call)
 export const waLink = (text = "Hello Bozid Dental, I'd like to book an appointment.") =>

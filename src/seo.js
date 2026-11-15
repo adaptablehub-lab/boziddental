@@ -9,14 +9,14 @@ export const SITE_NAME = "Bozid Dental Clinic";
 export const absUrl = (path = "/") => `${SITE_URL}${BASE_PATH}${path === "/" ? "/" : path.replace(/\/?$/, "/")}`;
 export const assetUrl = (file) => `${SITE_URL}${BASE_PATH}/assets/${file}`;
 
-const DEFAULT_IMAGE = "img/hero-1.jpg";
+const DEFAULT_IMAGE = "img/og-image.jpg"; // 1200×630 for WhatsApp / Facebook / X previews
 
 /** Per-page titles and descriptions (keep titles under ~60 characters, descriptions under ~160). */
 export const pages = {
   "/": {
     title: "Bozid Dental Clinic, Ibadan | Your smile, our priority",
     description: "Quality, affordable dental care in Ibadan for the whole family. Check-ups, scaling & polishing, fillings, root canal, crowns, implants, whitening and Invisalign. Book online or on WhatsApp.",
-    image: "img/hero-1.jpg",
+    image: "img/og-image.jpg",
   },
   "/about": {
     title: "About us | Bozid Dental Clinic, Ibadan",
@@ -31,6 +31,8 @@ export const pages = {
   "/team": {
     title: "Meet the team | Bozid Dental Clinic, Ibadan",
     description: "Meet the caring, experienced dental professionals at Bozid Dental Clinic, Ring Road, Ibadan.",
+    // Hidden from search until the team profiles have real names, photos and details. Remove this line then.
+    noindex: true,
   },
   "/reviews": {
     title: "Patient reviews | Bozid Dental Clinic, Ibadan",
