@@ -594,3 +594,10 @@ h3 { font-size: 1.2rem; }
 @media (max-width: 1080px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
 .svc-card .svc__cat { display: inline-block !important; }
+
+/* Services: load more */
+.load-more { display: grid; justify-items: center; gap: 14px; margin-top: 36px; }
+.load-more__count { color: var(--muted); font-size: .92rem; }
+.load-more .btn { padding: 6px 6px 6px 24px; }
+.load-more .btn__arrow { transition: transform .25s; }
+.load-more .btn:hover .btn__arrow { transform: translateY(2px); }

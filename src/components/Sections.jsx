@@ -38,13 +38,19 @@ export function ServicesList() {
   // Start from the defaults so the browser matches the pre-rendered HTML, then apply the link's ?cat= / ?open=
   const [cat, setCat] = useState("all");
   const [highlight, setHighlight] = useState(null);
+  const PAGE = 6;
+  const [visible, setVisible] = useState(PAGE);
   const list = cat === "all" ? services : services.filter((s) => s.category === cat);
+  const shown = list.slice(0, visible);
+  const remaining = list.length - shown.length;
+  const pickCat = (id) => { setCat(id); setVisible(PAGE); };
   const catLabel = (id) => serviceCategories.find((c) => c.id === id)?.label;
 
   // Arriving from the home page: bring the chosen category or treatment into view, briefly highlighted
   useEffect(() => {
     if (serviceCategories.some((c) => c.id === fromCat)) setCat(fromCat);
-    if (services.some((s) => s.slug === fromOpen)) setHighlight(fromOpen);
+    const idx = services.findIndex((s) => s.slug === fromOpen);
+    if (idx >= 0) { setHighlight(fromOpen); setVisible(Math.ceil((idx + 1) / PAGE) * PAGE); } // make sure the linked card is shown
   }, [fromCat, fromOpen]);
   useEffect(() => {
     if (!fromCat && !fromOpen) return;
@@ -63,14 +69,14 @@ export function ServicesList() {
 
         <div className="filters" role="group" aria-label="Filter services">
           {[{ id: "all", label: `All (${services.length})` }, ...serviceCategories].map((c) => (
-            <button key={c.id} type="button" className={cat === c.id ? "filter is-active" : "filter"} aria-pressed={cat === c.id} onClick={() => setCat(c.id)}>
+            <button key={c.id} type="button" className={cat === c.id ? "filter is-active" : "filter"} aria-pressed={cat === c.id} onClick={() => pickCat(c.id)}>
               {c.label}
             </button>
           ))}
         </div>
 
         <div className="svc-grid">
-          {list.map((s) => {
+          {shown.map((s) => {
             const n = services.indexOf(s) + 1;
             return (
               <article key={s.slug} id={`svc-row-${s.slug}`} className={highlight === s.slug ? "svc-card is-highlight" : "svc-card"}>
@@ -88,6 +94,14 @@ export function ServicesList() {
             );
           })}
         </div>
+        {remaining > 0 && (
+          <div className="load-more">
+            <p className="load-more__count">Showing {shown.length} of {list.length} services</p>
+            <button type="button" className="btn btn--outline" onClick={() => setVisible((v) => v + PAGE)}>
+              Load {Math.min(PAGE, remaining)} more<span className="btn__arrow" aria-hidden="true">↓</span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
